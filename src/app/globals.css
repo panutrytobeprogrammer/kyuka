@@ -16,3 +16,15 @@
   background: #5a5a5a18;
   backdrop-filter: blur(50px);
 }
+
+.bg-blur {
+  backdrop-filter: blur(50px);
+}
+
+.bg-image {
+  background-image: url("/background.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}

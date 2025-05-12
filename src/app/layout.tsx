@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
@@ -13,6 +13,14 @@ export const metadata: Metadata = {
   description: "Ryoko travel application",
 };
 
+export const viewport: Viewport = {
+  maximumScale: 1,
+  initialScale: 1,
+  width: "device-width",
+  minimumScale: 1,
+  userScalable: false,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -21,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-[#1B2027]">
       <body
-        className={`${poppins.className} antialiased bg-[url('/background.png')] bg-cover bg-center bg-no-repeat flex max-w-md mx-auto flex-col min-h-screen bg-fixed`}
+        className={`${poppins.className} antialiased bg-image flex max-w-md mx-auto flex-col min-h-screen`}
       >
         <Providers>{children}</Providers>
       </body>

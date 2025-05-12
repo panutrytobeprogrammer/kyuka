@@ -23,8 +23,9 @@ function Header({ title }: Props) {
             {session.status === "authenticated" && (
               <>
                 <Avatar
-                  className={`cursor-pointer label-md bold bg-opacity-45`}
-                  src={session.data.user?.image || undefined}
+                  className={`cursor-pointer label-md bold`}
+                  // src={session.data.user?.image || undefined}
+                  isBordered
                 />
               </>
             )}
