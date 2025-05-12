@@ -2,6 +2,7 @@
 import { AppProvider } from "@context/appContext";
 import { HeroUIProvider, Spinner } from "@heroui/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { SessionProvider } from "next-auth/react";
 import { ReactNode, Suspense } from "react";
 
 type Props = {
@@ -20,17 +21,19 @@ export default function Providers({ children }: Props) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <HeroUIProvider>
-        <Suspense
-          fallback={
-            <div className="flex items-center justify-center h-screen bg-gray-50">
-              <Spinner variant="gradient" />
-            </div>
-          }
-        >
-          <AppProvider>{children}</AppProvider>
-        </Suspense>
-      </HeroUIProvider>
+      <SessionProvider>
+        <HeroUIProvider>
+          <Suspense
+            fallback={
+              <div className="flex items-center justify-center h-screen bg-gray-50">
+                <Spinner variant="gradient" />
+              </div>
+            }
+          >
+            <AppProvider>{children}</AppProvider>
+          </Suspense>
+        </HeroUIProvider>
+      </SessionProvider>
     </QueryClientProvider>
   );
 }

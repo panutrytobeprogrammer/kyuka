@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "Ryoko travel application",
     start_url: "/",
     display: "standalone",
-    background_color: "#ffffff",
-    theme_color: "#000000",
+    background_color: "#1B202705",
+    theme_color: "#1B202705",
     icons: [
       {
         src: "/icon-192x192.png",

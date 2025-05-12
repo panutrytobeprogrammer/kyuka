@@ -9,6 +9,9 @@ export default {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        "ios-background": "url('/background.png')",
+      },
       colors: {
         default: "E5F2FD",
         primary: {
@@ -120,6 +123,9 @@ export default {
         danger: "#DF4953",
         foreground: {
           500: "hsl(240, 4%, 46%)",
+        },
+        theme: {
+          background: "#F4F4F305",
         },
       },
     },

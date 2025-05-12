@@ -16,26 +16,22 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async signIn({ user }) {
-      const allowUsers: string[] = (process.env.ACCESS_EMAIL as string).split(
-        ","
-      );
-      if (allowUsers.includes(user.email?.toLowerCase().trim() as string)) {
-        return true;
-      } else {
-        console.error(`${user.email} not allowed to sign-in`);
-        return false;
-      }
+      // const allowUsers: string[] = (process.env.ACCESS_EMAIL as string).split(
+      //   ","
+      // );
+      // if (allowUsers.includes(user.email?.toLowerCase().trim() as string)) {
+      //   return true;
+      // } else {
+      //   console.error(`${user.email} not allowed to sign-in`);
+      //   return false;
+      // }
+      return true;
     },
     redirect({ baseUrl }) {
       return baseUrl;
     },
     async jwt({ token, account }) {
-      console.log(account?.access_token);
-
-      const transformedObject = Object.fromEntries(
-        Object.entries(token).filter(([key]) => key !== "picture")
-      );
-      return transformedObject;
+      return token;
     },
     async session({ session }) {
       return {
