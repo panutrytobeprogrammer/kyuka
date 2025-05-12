@@ -42,6 +42,6 @@ export default withAuth(customMiddleware);
 
 export const config = {
   matcher: [
-    "/((?!api/auth|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|login).*)",
+    "/((?!api/auth|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|login|manifest.webmanifest|icon-192x192.png|icon-512x512.png).*)",
   ],
 };
