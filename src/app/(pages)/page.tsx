@@ -8,16 +8,21 @@ import {
   Modal,
   ModalContent,
   Spinner,
+  Tab,
+  Tabs,
   useDisclosure,
 } from "@heroui/react";
 import { getTransactionData } from "@libs/service";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
+import { useState } from "react";
 
 export default function Home() {
   const addData = useDisclosure();
   const params = useParams();
   const id = params.id as string;
+
+  const [selectedTab, setSelectedTab] = useState("addData");
 
   const getDataTable = useQuery({
     queryKey: ["get-data-table"],
@@ -26,16 +31,49 @@ export default function Home() {
     },
   });
   return getDataTable.isSuccess ? (
-    <div className="flex flex-col h-screen w-full overflow-y-auto">
+    <div className="flex flex-col h-screen w-full overflow-y-auto items-center">
       <Header title="Krabi" />
-      <div className="flex justify-end p-2">
-        <Button isIconOnly className="bg-item" onPress={addData.onOpen}>
-          <AddIcon />
-        </Button>
-      </div>
-      <div className="p-2">
-        <DataTable />
-      </div>
+      {(() => {
+        switch (selectedTab) {
+          case "addData":
+            return (
+              <>
+                <div className="flex justify-end p-2 w-full">
+                  <Button
+                    isIconOnly
+                    className="bg-item"
+                    onPress={addData.onOpen}
+                  >
+                    <AddIcon />
+                  </Button>
+                </div>
+                <div className="p-2">
+                  <DataTable />
+                </div>
+              </>
+            );
+          case "list":
+            return <></>;
+          case "result":
+            return <></>;
+          default:
+            return null;
+        }
+      })()}
+      <Tabs
+        radius="full"
+        selectedKey={selectedTab}
+        onSelectionChange={(key) => setSelectedTab(key as string)}
+        className="fixed bottom-10 w-full flex justify-center"
+        classNames={{
+          tabList: "bg-box",
+          cursor: "bg-item",
+        }}
+      >
+        <Tab key="addData" title="add data" />
+        <Tab key="list" title="List" />
+        <Tab key="result" title="Result" />
+      </Tabs>
       <Modal isOpen={addData.isOpen} onClose={addData.onClose} size="lg">
         <ModalContent>
           {(onClose) => {

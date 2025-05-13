@@ -122,7 +122,7 @@ function DataTable({}: Props) {
       }}
       isVirtualized
       isHeaderSticky
-      maxTableHeight={650}
+      maxTableHeight={600}
     >
       <TableHeader columns={columns}>
         {(column) => (

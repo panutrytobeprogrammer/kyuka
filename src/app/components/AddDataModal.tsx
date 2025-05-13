@@ -1,4 +1,4 @@
-import { ModalBody, ModalHeader } from "@heroui/react";
+import { Button, ModalBody, ModalHeader } from "@heroui/react";
 import { AddDataForm } from "@/types/index";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -17,6 +17,7 @@ function AddDataModal({ onClose }: Props) {
       <ModalBody className="flex flex-col gap-2">
         <TextField
           field="name"
+          label="name"
           control={addData.control}
           error={addData.formState.errors.name}
           placeholder="eg. ร้านข้าวป้าศรี"
@@ -25,14 +26,18 @@ function AddDataModal({ onClose }: Props) {
           field="is_equal"
           control={addData.control}
           error={addData.formState.errors.is_equal}
-          options={[{ id: 1, value: "หารเท่า" }]}
+          options={[{ id: 1, value: "equally" }]}
         />
         <TextField
           field="transaction_by_member"
+          label="amount"
           control={addData.control}
           error={addData.formState.errors.transaction_by_member}
-          placeholder="eg. ร้านข้าวป้าศรี"
+          placeholder="eg. 200.00"
         />
+        <Button className="bg-item" onPress={onClose}>
+          add
+        </Button>
       </ModalBody>
     </>
   );

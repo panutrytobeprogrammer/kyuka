@@ -15,7 +15,7 @@ function Header({ title }: Props) {
   const session = useSession();
 
   return (
-    <div className="flex justify-between px-4 py-2">
+    <div className="flex flex-row justify-between px-4 py-2 w-full">
       <p className="text-[32px] font-medium text-gray-50">{title}</p>
       <Dropdown>
         <DropdownTrigger>
