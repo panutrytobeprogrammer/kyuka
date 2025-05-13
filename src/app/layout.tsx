@@ -29,9 +29,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-[#1B2027]">
       <body
-        className={`${poppins.className} antialiased bg-image flex max-w-md mx-auto flex-col min-h-screen`}
+        className={`${poppins.className} antialiased bg-image flex max-w-md mx-auto flex-col min-h-screen max-h-screen`}
       >
         <Providers>{children}</Providers>
+        <p className="fixed bottom-1 p-2 w-full text-center text-[12px] text-gray-800">
+          powered by witeseb.website
+        </p>
       </body>
     </html>
   );

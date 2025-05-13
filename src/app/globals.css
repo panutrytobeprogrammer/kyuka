@@ -17,8 +17,9 @@
   backdrop-filter: blur(50px);
 }
 
-.bg-blur {
-  backdrop-filter: blur(50px);
+.bg-item {
+  backdrop-filter: blur(25px);
+  background: #f4f4f380;
 }
 
 .bg-image {
@@ -27,4 +28,8 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+}
+
+body {
+  overflow: hidden;
 }

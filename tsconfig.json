@@ -19,7 +19,7 @@
       }
     ],
     "paths": {
-      "@types/*": ["./types/*"],
+      "@/types/*": ["./src/app/types/*"],
       "@config/*": ["./config/*"],
       "@components/*": ["./src/app/components/*"],
       "@context/*": ["./src/app/context/*"],

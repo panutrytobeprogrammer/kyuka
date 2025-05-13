@@ -7,11 +7,11 @@ type Props = {};
 
 function LoginPage({}: Props) {
   return (
-    <div className="flex flex-col items-center justify-center h-full w-full">
+    <div className="flex flex-col items-center justify-center h-[105vh] w-full overflow-y-auto">
       <div className="flex flex-col items-center justify-center bg-box rounded-[12px] p-4 gap-4">
         <p className="text-xl font-medium">Welcome to Ryoko</p>
         <Button
-          className="dark:bg-black body-lg bold bg-[#f4f4f3e1] bg-blur"
+          className="body-lg bold bg-item"
           onPress={() => signIn("google")}
           data-testid="signin-google-btn"
           startContent={<GoogleIcon height={30} width={30} />}

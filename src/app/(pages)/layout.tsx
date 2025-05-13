@@ -5,9 +5,7 @@ type Props = {
 };
 
 function Layout({ children }: Props) {
-  return (
-    <div className="flex w-full h-full background-theme p-2">{children}</div>
-  );
+  return <div className="flex w-full background-theme p-2">{children}</div>;
 }
 
 export default Layout;
