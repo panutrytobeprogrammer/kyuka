@@ -49,3 +49,37 @@ export type OptionQuestion = {
   id: number;
   value: string;
 };
+
+export interface APIResponse<T> {
+  code: number;
+  message: string;
+  data: T;
+}
+
+export interface TripData {
+  id: string;
+  name: string;
+  description: string;
+  member: Member[];
+  status: boolean;
+  create_date: string;
+}
+
+export interface Member {
+  name: string;
+  email: string;
+}
+
+export interface TransactionData {
+  id: string;
+  name: string;
+  amount: number;
+  trip_id: string;
+  transaction_by_member: TransactionByMember[];
+  create_date: Date;
+}
+
+export interface TransactionByMember {
+  amount: number;
+  member_name: string;
+}

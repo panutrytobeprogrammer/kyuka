@@ -56,8 +56,11 @@ export default function Home() {
                     <AddIcon />
                   </Button>
                 </div>
-                <div className="p-2">
-                  <DataTable />
+                <div className="p-2 w-full">
+                  <DataTable
+                    tripData={getTrip.data?.data.data}
+                    transactionData={getDataTable.data?.data.data}
+                  />
                 </div>
               </>
             ) : (

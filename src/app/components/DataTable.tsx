@@ -8,111 +8,39 @@ import {
   TableRow,
 } from "@heroui/react";
 import React from "react";
+import { TransactionData, TripData } from "../types";
 
-type Props = {};
+type Props = {
+  tripData: TripData;
+  transactionData: TransactionData[];
+};
 
-function DataTable({}: Props) {
-  const rows = [
-    {
-      key: "1",
-      name: "Tony Reichert",
-      role: "CEO",
-      status: "Active",
-    },
-    {
-      key: "2",
-      name: "Zoey Lang",
-      role: "Technical Lead",
-      status: "Paused",
-    },
-    {
-      key: "3",
-      name: "Jane Fisher",
-      role: "Senior Developer",
-      status: "Active",
-    },
-    {
-      key: "4",
-      name: "William Howard",
-      role: "Community Manager",
-      status: "Vacation",
-    },
-    {
-      key: "5",
-      name: "Emily Chen",
-      role: "Product Manager",
-      status: "Active",
-    },
-    {
-      key: "6",
-      name: "Michael Rodriguez",
-      role: "UX Designer",
-      status: "Active",
-    },
-    {
-      key: "7",
-      name: "Sarah Johnson",
-      role: "QA Engineer",
-      status: "Paused",
-    },
-    {
-      key: "8",
-      name: "David Kim",
-      role: "Backend Developer",
-      status: "Vacation",
-    },
-    {
-      key: "9",
-      name: "Emily Chen",
-      role: "Product Manager",
-      status: "Active",
-    },
-    {
-      key: "10",
-      name: "James Wilson",
-      role: "Frontend Developer",
-      status: "Active",
-    },
-    {
-      key: "11",
-      name: "Sophie Taylor",
-      role: "DevOps Engineer",
-      status: "Paused",
-    },
-    {
-      key: "12",
-      name: "Daniel Lee",
-      role: "Mobile Developer",
-      status: "Active",
-    },
-    {
-      key: "13",
-      name: "Rachel Martinez",
-      role: "Data Scientist",
-      status: "Vacation",
-    },
-    {
-      key: "14",
-      name: "Thomas Anderson",
-      role: "Security Engineer",
-      status: "Active",
-    },
-  ];
+function DataTable({ tripData, transactionData }: Props) {
+  const rows = transactionData.map((tx) => ({
+    key: tx.id,
+    list: tx.name,
+    ...Object.fromEntries(
+      tx.transaction_by_member.map((member) => [
+        member.member_name,
+        member.amount,
+      ])
+    ),
+  }));
+  console.log(rows);
 
   const columns = [
     {
-      key: "name",
-      label: "NAME",
-    },
-    {
-      key: "role",
-      label: "ROLE",
-    },
-    {
-      key: "status",
-      label: "STATUS",
+      key: "list",
+      label: "list",
     },
   ];
+
+  tripData.member.forEach((member) => {
+    columns.push({
+      key: member.name,
+      label: member.name,
+    });
+  });
 
   return (
     <Table
