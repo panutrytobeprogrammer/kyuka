@@ -42,7 +42,7 @@ export type AddDataForm = {
 
 export interface TransactionByMember {
   member_name: string;
-  amount: number;
+  amount: number | undefined;
 }
 
 export type OptionQuestion = {
@@ -80,6 +80,6 @@ export interface TransactionData {
 }
 
 export interface TransactionByMember {
-  amount: number;
+  amount: number | undefined;
   member_name: string;
 }

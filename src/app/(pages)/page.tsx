@@ -41,7 +41,7 @@ export default function Home() {
 
   return getTrip.isSuccess ? (
     <div className="flex flex-col h-screen w-full overflow-y-auto items-center">
-      <Header title="Krabi" />
+      <Header title={getTrip.data?.data.data.name} />
       {(() => {
         switch (selectedTab) {
           case "addData":
@@ -91,7 +91,13 @@ export default function Home() {
       <Modal isOpen={addData.isOpen} onClose={addData.onClose} size="lg">
         <ModalContent>
           {(onClose) => {
-            return <AddDataModal onClose={onClose} />;
+            return (
+              <AddDataModal
+                onClose={onClose}
+                tripData={getTrip.data?.data.data}
+                getDataTable={getDataTable}
+              />
+            );
           }}
         </ModalContent>
       </Modal>

@@ -20,22 +20,26 @@ export const GET = async (
   return successResponse(result.rows);
 };
 
-export const POST = async (req: NextRequest) => {
-  const { id } = await req.json();
+export const POST = async (
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) => {
+  const { id } = await params;
   const body: AddDataForm = await req.json();
   const client = await DBPool.connect();
 
   const amount = body.transaction_by_member?.reduce(
-    (acc, curr) => acc + curr.amount,
+    (acc, curr) => acc + (curr?.amount ?? 0),
     0
   );
 
-  const member = (
-    await client.query("SELECT member FROM member WHERE trip_id = $1", [id])
-  ).rows;
-
   let tx_by_member: TransactionByMember[] = [];
+
   if (body.is_equal) {
+    const member = (
+      await client.query("SELECT member FROM trip WHERE id = $1", [id])
+    ).rows;
+
     tx_by_member = member.map((m) => ({
       member_name: m.member,
       amount: amount / member.length,
@@ -49,7 +53,9 @@ export const POST = async (req: NextRequest) => {
       body.name,
       amount,
       id,
-      body.is_equal ? tx_by_member : body.transaction_by_member,
+      body.is_equal
+        ? JSON.stringify(tx_by_member)
+        : JSON.stringify(body.transaction_by_member),
     ]
   );
   client.release();
