@@ -34,11 +34,11 @@ export interface DefaultInputProps<TFieldValues extends FieldValues = any> {
     | undefined;
 }
 
-export interface AddDataForm {
+export type AddDataForm = {
   name: string;
-  is_equal?: boolean;
-  transaction_by_member?: TransactionByMember[];
-}
+  is_equal: boolean;
+  transaction_by_member: TransactionByMember[];
+};
 
 export interface TransactionByMember {
   member_name: string;

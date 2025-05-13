@@ -12,15 +12,15 @@ import {
   Tabs,
   useDisclosure,
 } from "@heroui/react";
-import { getTransactionData } from "@libs/service";
+import { getTransactionData, getTripData } from "@libs/service";
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 export default function Home() {
   const addData = useDisclosure();
-  const params = useParams();
-  const id = params.id as string;
+  const params = useSearchParams();
+  const id = params.get("id") as string;
 
   const [selectedTab, setSelectedTab] = useState("addData");
 
@@ -30,13 +30,22 @@ export default function Home() {
       return await getTransactionData(id);
     },
   });
-  return getDataTable.isSuccess ? (
+
+  const getTrip = useQuery({
+    queryKey: ["get-trip"],
+    queryFn: async () => {
+      return await getTripData(id);
+    },
+    refetchInterval: false,
+  });
+
+  return getTrip.isSuccess ? (
     <div className="flex flex-col h-screen w-full overflow-y-auto items-center">
       <Header title="Krabi" />
       {(() => {
         switch (selectedTab) {
           case "addData":
-            return (
+            return getDataTable.isSuccess ? (
               <>
                 <div className="flex justify-end p-2 w-full">
                   <Button
@@ -51,6 +60,8 @@ export default function Home() {
                   <DataTable />
                 </div>
               </>
+            ) : (
+              <></>
             );
           case "list":
             return <></>;

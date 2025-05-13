@@ -13,7 +13,8 @@ export default function Providers({ children }: Props) {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
-        refetchOnWindowFocus: false,
+        refetchOnWindowFocus: true,
+        refetchInterval: 1000 * 10,
         retry: 0,
       },
     },
