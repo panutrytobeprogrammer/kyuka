@@ -16,18 +16,11 @@ export const authOptions: NextAuthOptions = {
   ],
   callbacks: {
     async signIn({ user }) {
-      // const allowUsers: string[] = (process.env.ACCESS_EMAIL as string).split(
-      //   ","
-      // );
-      // if (allowUsers.includes(user.email?.toLowerCase().trim() as string)) {
-      //   return true;
-      // } else {
-      //   console.error(`${user.email} not allowed to sign-in`);
-      //   return false;
-      // }
       return true;
     },
-    redirect({ baseUrl }) {
+    redirect({ baseUrl, url }) {
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      else if (new URL(url).origin === baseUrl) return url;
       return baseUrl;
     },
     async jwt({ token, account }) {

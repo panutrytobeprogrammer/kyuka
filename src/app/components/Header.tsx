@@ -6,6 +6,8 @@ import {
   DropdownTrigger,
 } from "@heroui/react";
 import { signOut, useSession } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 type Props = {
   title: string;
@@ -13,6 +15,8 @@ type Props = {
 
 function Header({ title }: Props) {
   const session = useSession();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   return (
     <div className="flex flex-row justify-between px-4 py-2 w-full">
@@ -47,7 +51,14 @@ function Header({ title }: Props) {
             key="sign out"
             color="danger"
             className="text-red-500 hover:text-white"
-            onClick={() => signOut({ callbackUrl: "/" })}
+            onClick={() =>
+              signOut({
+                callbackUrl: `/login?callbackUrl=${encodeURIComponent(
+                  pathname + "?" + searchParams.toString()
+                )}`,
+                redirect: true,
+              })
+            }
           >
             <p className="label-md bold">Sign out</p>
           </DropdownItem>
