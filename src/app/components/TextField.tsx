@@ -30,10 +30,10 @@ function TextField<T extends FieldValues>(props: TextFieldProps<T>) {
   } = props;
 
   return (
-    <div className="flex flex-col justify-start label-md space-y-2">
+    <div className="flex flex-col justify-start label-md gap-1">
       {label && (
         <div className="flex space-x-2">
-          <p>
+          <p className="font-[14px]">
             {label}
             {required && <span className="required-field text-red-500">*</span>}
           </p>

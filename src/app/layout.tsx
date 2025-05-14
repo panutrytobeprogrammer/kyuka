@@ -1,9 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Poppins } from "next/font/google";
+import { K2D } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
 
-const poppins = Poppins({
+const k2d = K2D({
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
 });
@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-[#1B2027]">
       <body
-        className={`${poppins.className} antialiased bg-image flex max-w-md mx-auto flex-col min-h-screen max-h-screen`}
+        className={`${k2d.className} antialiased bg-image flex max-w-md mx-auto flex-col min-h-screen max-h-screen`}
       >
         <Providers>{children}</Providers>
         <p className="fixed bottom-2 p-2 w-full text-center text-[12px] text-gray-800">

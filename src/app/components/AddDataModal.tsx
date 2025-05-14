@@ -64,7 +64,7 @@ function AddDataModal({ onClose, tripData, getDataTable }: Props) {
     <FormProvider {...addData}>
       <form onSubmit={addData.handleSubmit(onSubmit)}>
         <ModalHeader className="flex flex-col gap-1">add data</ModalHeader>
-        <ModalBody className="flex flex-col gap-2">
+        <ModalBody className="flex flex-col gap-4">
           <TextField
             field="name"
             label="name"
@@ -88,7 +88,7 @@ function AddDataModal({ onClose, tripData, getDataTable }: Props) {
               placeholder="eg. 200.00"
             />
           ))}
-          <Button className="bg-item" type="submit">
+          <Button className="bg-gray-200" type="submit">
             add
           </Button>
         </ModalBody>
