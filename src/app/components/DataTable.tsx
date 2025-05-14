@@ -49,7 +49,7 @@ function DataTable({ tripData, transactionData }: Props) {
       }}
       isVirtualized
       isHeaderSticky
-      maxTableHeight={600}
+      maxTableHeight={550}
     >
       <TableHeader columns={columns}>
         {(column) => (

@@ -71,7 +71,10 @@ export default function Home() {
               return <ListTab transactionData={getDataTable.data?.data.data} />;
             case "result":
               return (
-                <ResultTab transactionData={getDataTable.data?.data.data} />
+                <ResultTab
+                  transactionData={getDataTable.data?.data.data}
+                  members={getTrip.data?.data.data.member}
+                />
               );
             default:
               return null;
@@ -90,9 +93,9 @@ export default function Home() {
           cursor: "bg-item",
         }}
       >
-        <Tab key="addData" title="add data" />
-        <Tab key="list" title="List" />
-        <Tab key="result" title="Result" />
+        <Tab key="addData" title="data" />
+        <Tab key="list" title="by list" />
+        <Tab key="result" title="by member" />
       </Tabs>
       <Modal isOpen={addData.isOpen} onClose={addData.onClose} size="lg">
         <ModalContent>
