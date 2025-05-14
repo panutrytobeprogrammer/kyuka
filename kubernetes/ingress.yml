@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: kyuka-web-ingress
+  namespace: witeseb
+status:
+  loadBalancer:
+    ingress:
+      - ip: 127.0.0.1
+spec:
+  ingressClassName: public
+  rules:
+    - host: kyuka.witeseb.website
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: kyuka-web-svc
+                port:
+                  number: 3000

@@ -1,7 +1,8 @@
 import axios from "axios";
+import { env } from "next-runtime-env";
 import { v4 } from "uuid";
 
-const baseUrl = process.env.NEXT_PUBLIC_URL;
+const baseUrl = env("NEXT_PUBLIC_URL");
 
 const instance = axios.create({
   baseURL: baseUrl,

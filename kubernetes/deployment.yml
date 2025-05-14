@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: witeseb
+  name: kyuka-web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kyuka-web
+  template:
+    metadata:
+      labels:
+        app: kyuka-web
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - name: kyuka-web
+          image: registry.witeseb.website/kyuka:0.0.1
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          resources:
+            limits:
+              cpu: 200m
+              memory: 256Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+          envFrom:
+            - secretRef:
+                name: kyuka-web-secret
