@@ -27,7 +27,7 @@ function Layout({ children }: Props) {
     manifestLink.rel = "manifest";
     manifestLink.href = `/api/manifest?id=${id}`;
     document.head.appendChild(manifestLink);
-  }, []);
+  }, [urlParams]);
 
   if (isIOS && !isStandalone && process.env.NODE_ENV === "production") {
     return (
