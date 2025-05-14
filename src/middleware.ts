@@ -41,5 +41,5 @@ async function customMiddleware(request: NextRequest) {
 export default withAuth(customMiddleware);
 
 export const config = {
-  matcher: ["/", "/api/transaction", "/api/user", "/admin"],
+  matcher: ["/", "/api/transaction", "/api/user", "/admin", "/api/trip"],
 };
