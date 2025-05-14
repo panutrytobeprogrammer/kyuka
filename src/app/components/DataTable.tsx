@@ -26,7 +26,6 @@ function DataTable({ tripData, transactionData }: Props) {
       ])
     ),
   }));
-  console.log(rows);
 
   const columns = [
     {

@@ -41,7 +41,10 @@ function AddDataModal({ onClose, tripData, getDataTable }: Props) {
   });
 
   const onSubmit: SubmitHandler<AddDataForm> = (data) => {
-    console.log(data);
+    data.transaction_by_member.forEach((tx) => {
+      tx.amount = Number(tx.amount);
+    });
+
     saveTxMutate.mutate(data, {
       onSuccess: () => {
         onClose();

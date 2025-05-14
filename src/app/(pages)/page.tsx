@@ -3,6 +3,8 @@ import AddDataModal from "@components/AddDataModal";
 import DataTable from "@components/DataTable";
 import Header from "@components/Header";
 import { AddIcon } from "@components/Icons";
+import ListTab from "@components/ListTab";
+import ResultTab from "@components/ResultTab";
 import {
   Button,
   Modal,
@@ -42,38 +44,42 @@ export default function Home() {
   return getTrip.isSuccess ? (
     <div className="flex flex-col h-screen w-full overflow-y-auto items-center">
       <Header title={getTrip.data?.data.data.name} />
-      {(() => {
-        switch (selectedTab) {
-          case "addData":
-            return getDataTable.isSuccess ? (
-              <>
-                <div className="flex justify-end p-2 w-full">
-                  <Button
-                    isIconOnly
-                    className="bg-item"
-                    onPress={addData.onOpen}
-                  >
-                    <AddIcon />
-                  </Button>
-                </div>
-                <div className="p-2 w-full">
-                  <DataTable
-                    tripData={getTrip.data?.data.data}
-                    transactionData={getDataTable.data?.data.data}
-                  />
-                </div>
-              </>
-            ) : (
-              <></>
-            );
-          case "list":
-            return <></>;
-          case "result":
-            return <></>;
-          default:
-            return null;
-        }
-      })()}
+      {getDataTable.isSuccess ? (
+        (() => {
+          switch (selectedTab) {
+            case "addData":
+              return (
+                <>
+                  <div className="flex justify-end p-2 w-full">
+                    <Button
+                      isIconOnly
+                      className="bg-item"
+                      onPress={addData.onOpen}
+                    >
+                      <AddIcon />
+                    </Button>
+                  </div>
+                  <div className="p-2 w-full">
+                    <DataTable
+                      tripData={getTrip.data?.data.data}
+                      transactionData={getDataTable.data?.data.data}
+                    />
+                  </div>
+                </>
+              );
+            case "list":
+              return <ListTab transactionData={getDataTable.data?.data.data} />;
+            case "result":
+              return (
+                <ResultTab transactionData={getDataTable.data?.data.data} />
+              );
+            default:
+              return null;
+          }
+        })()
+      ) : (
+        <></>
+      )}
       <Tabs
         radius="full"
         selectedKey={selectedTab}
