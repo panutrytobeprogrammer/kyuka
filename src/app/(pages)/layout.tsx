@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@heroui/react";
+import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 type Props = {
@@ -7,6 +8,7 @@ type Props = {
 };
 
 function Layout({ children }: Props) {
+  const urlParams = useSearchParams();
   const [isIOS, setIsIOS] = useState(false);
   const [isStandalone, setIsStandalone] = useState(false);
 
@@ -18,7 +20,16 @@ function Layout({ children }: Props) {
     setIsStandalone(window.matchMedia("(display-mode: standalone)").matches);
   }, []);
 
-  if (isIOS && !isStandalone) {
+  useEffect(() => {
+    const id = urlParams.get("id") || "default";
+
+    const manifestLink = document.createElement("link");
+    manifestLink.rel = "manifest";
+    manifestLink.href = `/api/manifest?id=${id}`;
+    document.head.appendChild(manifestLink);
+  }, []);
+
+  if (isIOS && !isStandalone && process.env.NODE_ENV === "production") {
     return (
       <div className="background-theme">
         <div className="flex flex-col items-center justify-center h-screen w-full gap-4 p-4">
