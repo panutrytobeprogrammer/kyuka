@@ -9,8 +9,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Ryoko",
-  description: "Ryoko travel application",
+  title: "Kyūka",
+  description: "Kyūka travel application",
 };
 
 export const viewport: Viewport = {

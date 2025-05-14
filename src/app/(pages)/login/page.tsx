@@ -9,7 +9,7 @@ function LoginPage({}: Props) {
   return (
     <div className="flex flex-col items-center justify-center h-[105vh] w-full overflow-y-auto">
       <div className="flex flex-col items-center justify-center bg-box rounded-[12px] p-4 gap-4">
-        <p className="text-xl font-medium text-gray-50">Welcome to Ryoko</p>
+        <p className="text-xl font-medium text-gray-50">Welcome to Kyūka</p>
         <Button
           className="body-lg bold bg-item"
           onPress={() => signIn("google")}
