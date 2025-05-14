@@ -3,7 +3,7 @@ import { AppProvider } from "@context/appContext";
 import { HeroUIProvider, Spinner, ToastProvider } from "@heroui/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { SessionProvider } from "next-auth/react";
-import { ReactNode, Suspense } from "react";
+import { ReactNode, Suspense, useEffect, useState } from "react";
 
 type Props = {
   children: ReactNode;
