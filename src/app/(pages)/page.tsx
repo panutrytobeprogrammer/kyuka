@@ -14,8 +14,9 @@ import {
   Tabs,
   useDisclosure,
 } from "@heroui/react";
-import { getTransactionData, getTripData } from "@libs/service";
+import { checkUser, getTransactionData, getTripData } from "@libs/service";
 import { useQuery } from "@tanstack/react-query";
+import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
@@ -43,7 +44,10 @@ export default function Home() {
 
   return getTrip.isSuccess ? (
     <div className="flex flex-col h-screen w-full overflow-y-auto items-center">
-      <Header title={getTrip.data?.data.data.name} />
+      <Header
+        title={getTrip.data?.data.data.name}
+        refetch={getDataTable.refetch}
+      />
       {getDataTable.isSuccess ? (
         (() => {
           switch (selectedTab) {

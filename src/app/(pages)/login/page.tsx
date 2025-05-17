@@ -1,14 +1,26 @@
 "use client";
 import { GoogleIcon } from "@components/Icons";
-import { Button } from "@heroui/react";
+import { addToast, Button } from "@heroui/react";
 import { signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 type Props = {};
 
 function LoginPage({}: Props) {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
+  const error = searchParams.get("error");
+
+  useEffect(() => {
+    if (!!error) {
+      addToast({
+        title: "you don't have a permission to log in this website.",
+        color: "danger",
+      });
+    }
+  }, []);
+
   return (
     <div className="flex flex-col items-center justify-center h-[105vh] w-full overflow-y-auto">
       <div className="flex flex-col items-center justify-center bg-box rounded-[12px] p-4 gap-4">

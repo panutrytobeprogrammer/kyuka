@@ -5,22 +5,38 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from "@heroui/react";
+import { RefetchOptions, QueryObserverResult } from "@tanstack/react-query";
+import { AxiosResponse } from "axios";
 import { signOut, useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { usePathname } from "next/navigation";
+import { APIResponse, TransactionData } from "../types";
 
 type Props = {
   title: string;
+  refetch: (
+    options?: RefetchOptions
+  ) => Promise<
+    QueryObserverResult<
+      AxiosResponse<APIResponse<TransactionData[]>, any>,
+      Error
+    >
+  >;
 };
 
-function Header({ title }: Props) {
+function Header({ title, refetch }: Props) {
   const session = useSession();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   return (
     <div className="flex flex-row justify-between px-4 py-2 w-full">
-      <p className="text-[32px] font-medium text-gray-50">{title}</p>
+      <p
+        className="text-[32px] font-medium text-gray-50"
+        onClick={() => refetch()}
+      >
+        {title}
+      </p>
       <Dropdown>
         <DropdownTrigger>
           <div className="flex gap-2 items-center">

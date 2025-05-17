@@ -1,5 +1,13 @@
 import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import { cookies } from "next/headers";
+import { APIResponse } from "../types";
+
+export function isAuthorized(id: string, email: string) {
+  return fetch(`${process.env.NEXTAUTH_URL}/api/${id}/${email}`, {
+    cache: "no-store",
+  });
+}
 
 export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
@@ -15,7 +23,7 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ user }) {
+    async signIn({ user, credentials }) {
       return true;
     },
     redirect({ baseUrl, url }) {

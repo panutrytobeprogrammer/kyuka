@@ -22,3 +22,7 @@ export const saveTransaction = async (data: AddDataForm, id: string) => {
 export const deleteTransaction = async (trip_id: string, tx_id: string) => {
   return await HttpClient.delete(`/api/transaction/${trip_id}/${tx_id}`);
 };
+
+export const checkUser = async (trip_id: string, email: string) => {
+  return await HttpClient.get<APIResponse<boolean>>(`/api/${trip_id}/${email}`);
+};
