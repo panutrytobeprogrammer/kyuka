@@ -68,7 +68,13 @@ export default function Home() {
                 </>
               );
             case "list":
-              return <ListTab transactionData={getDataTable.data?.data.data} />;
+              return (
+                <ListTab
+                  tripId={id}
+                  transactionData={getDataTable.data?.data.data}
+                  refetch={getDataTable.refetch}
+                />
+              );
             case "result":
               return (
                 <ResultTab

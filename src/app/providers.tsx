@@ -14,7 +14,7 @@ export default function Providers({ children }: Props) {
     defaultOptions: {
       queries: {
         refetchOnWindowFocus: true,
-        refetchInterval: 1000 * 10,
+        // refetchInterval: 1000 * 10,
         retry: 0,
       },
     },
