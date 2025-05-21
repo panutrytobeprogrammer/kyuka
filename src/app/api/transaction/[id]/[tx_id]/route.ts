@@ -21,9 +21,10 @@ export const DELETE = async (
     client.release();
 
     console.log({
+      file: __dirname,
       timestamp: new Date().toISOString(),
       headers: req.headers,
-      request: await req.json(),
+      request: req,
       response: result.rows,
     });
     return successResponse(null);

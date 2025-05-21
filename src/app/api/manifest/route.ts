@@ -29,8 +29,9 @@ export async function GET(req: NextRequest) {
   };
 
   console.log({
+    file: __dirname,
     timestamp: new Date().toISOString(),
-    request: await req.json(),
+    request: req,
     response: manifest,
   });
 

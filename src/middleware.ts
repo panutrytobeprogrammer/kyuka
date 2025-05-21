@@ -36,10 +36,11 @@ async function customMiddleware(request: NextRequest) {
   );
 
   console.log({
+    file: __dirname,
     timestamp: new Date().toISOString(),
     headers: requestHeaders,
     response: response.headers,
-    request: await request.json(),
+    request: request,
   });
 
   return response;

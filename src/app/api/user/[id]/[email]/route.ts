@@ -20,9 +20,10 @@ export const GET = async (
     const isMember = members.some((member) => member.email === email);
 
     console.log({
+      file: __dirname,
       timestamp: new Date().toISOString(),
       headers: req.headers,
-      request: await req.json(),
+      request: req,
       response: isMember,
     });
 
