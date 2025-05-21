@@ -19,6 +19,13 @@ export const DELETE = async (
       [id, tx_id]
     );
     client.release();
+
+    console.log({
+      timestamp: new Date().toISOString(),
+      headers: req.headers,
+      request: await req.json(),
+      response: result.rows,
+    });
     return successResponse(null);
   } catch (error) {
     console.error(error);

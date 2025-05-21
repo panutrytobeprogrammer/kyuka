@@ -28,6 +28,12 @@ export async function GET(req: NextRequest) {
     ],
   };
 
+  console.log({
+    timestamp: new Date().toISOString(),
+    request: await req.json(),
+    response: manifest,
+  });
+
   return new NextResponse(JSON.stringify(manifest), {
     headers: {
       "Content-Type": "application/manifest+json",

@@ -11,5 +11,12 @@ export const GET = async (
   const result = await client.query("SELECT * FROM trip WHERE id = $1", [id]);
   client.release();
 
+  console.log({
+    timestamp: new Date().toISOString(),
+    headers: req.headers,
+    request: await req.json(),
+    response: result.rows[0],
+  });
+
   return successResponse(result.rows[0]);
 };

@@ -35,6 +35,13 @@ async function customMiddleware(request: NextRequest) {
     contentSecurityPolicyHeaderValue
   );
 
+  console.log({
+    timestamp: new Date().toISOString(),
+    headers: requestHeaders,
+    response: response.headers,
+    request: await request.json(),
+  });
+
   return response;
 }
 

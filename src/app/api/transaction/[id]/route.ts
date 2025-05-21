@@ -17,6 +17,13 @@ export const GET = async (
   );
   client.release();
 
+  console.log({
+    timestamp: new Date().toISOString(),
+    headers: req.headers,
+    request: await req.json(),
+    response: result.rows,
+  });
+
   return successResponse(result.rows);
 };
 
@@ -59,6 +66,13 @@ export const POST = async (
     ]
   );
   client.release();
+
+  console.log({
+    timestamp: new Date().toISOString(),
+    headers: req.headers,
+    request: await req.json(),
+    response: result.rows,
+  });
 
   return successResponse(null);
 };

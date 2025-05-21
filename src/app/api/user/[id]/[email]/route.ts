@@ -19,6 +19,13 @@ export const GET = async (
 
     const isMember = members.some((member) => member.email === email);
 
+    console.log({
+      timestamp: new Date().toISOString(),
+      headers: req.headers,
+      request: await req.json(),
+      response: isMember,
+    });
+
     return successResponse(isMember);
   } catch (error) {
     return errorResponse(error);
