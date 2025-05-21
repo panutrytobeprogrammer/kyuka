@@ -1,17 +1,15 @@
-import { addToast, Button, ModalBody, ModalHeader, toast } from "@heroui/react";
 import {
   AddDataForm,
   APIResponse,
   TransactionData,
   TripData,
 } from "@/types/index";
-import React from "react";
+import { addToast, Button, ModalBody, ModalHeader } from "@heroui/react";
+import { saveTransaction } from "@libs/service";
+import { useMutation, UseQueryResult } from "@tanstack/react-query";
+import { AxiosResponse } from "axios";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import TextField from "./TextField";
-import Checkbox from "./Checkbox";
-import { useMutation, UseQueryResult } from "@tanstack/react-query";
-import { saveTransaction } from "@libs/service";
-import { AxiosResponse } from "axios";
 
 type Props = {
   onClose: () => void;
@@ -29,7 +27,7 @@ function AddDataModal({ onClose, tripData, getDataTable }: Props) {
       is_equal: false,
       transaction_by_member: tripData.member.map((member) => ({
         member_name: member.name,
-        amount: undefined,
+        amount: 0,
       })),
     },
   });
@@ -67,10 +65,20 @@ function AddDataModal({ onClose, tripData, getDataTable }: Props) {
         <ModalBody className="flex flex-col gap-4">
           <TextField
             field="name"
-            label="name"
+            label="store name"
             control={addData.control}
             error={addData.formState.errors.name}
             placeholder="eg. ร้านข้าวป้าศรี"
+            rules={{
+              required: {
+                value: true,
+                message: "this field is required",
+              },
+              pattern: {
+                value: /^[a-zA-Z0-9ก-๙\s]+$/,
+                message: "must be a valid name",
+              },
+            }}
           />
           {/* <Checkbox
             field="is_equal"
@@ -86,6 +94,12 @@ function AddDataModal({ onClose, tripData, getDataTable }: Props) {
               control={addData.control}
               error={addData.formState.errors.transaction_by_member}
               placeholder="eg. 200.00"
+              rules={{
+                pattern: {
+                  value: /^[0-9]+(\.[0-9]{1,2})?$/,
+                  message: "must be a number",
+                },
+              }}
             />
           ))}
           <Button className="bg-gray-200" type="submit">

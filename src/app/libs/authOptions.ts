@@ -1,7 +1,5 @@
 import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import { cookies } from "next/headers";
-import { APIResponse } from "../types";
 
 export function isAuthorized(id: string, email: string) {
   return fetch(`${process.env.NEXTAUTH_URL}/api/${id}/${email}`, {
