@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@heroui/react";
 import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -21,7 +20,8 @@ function Layout({ children }: Props) {
   }, []);
 
   useEffect(() => {
-    const id = urlParams.get("id") || "default";
+    const id =
+      urlParams.get("id") || urlParams.get("callbackUrl")?.split("=")[1];
 
     const manifestLink = document.createElement("link");
     manifestLink.rel = "manifest";
@@ -34,22 +34,10 @@ function Layout({ children }: Props) {
       <div className="background-theme">
         <div className="flex flex-col items-center justify-center h-screen w-full gap-4 p-4">
           <p className="text-white text-2xl font-bold">Install App</p>
-          <Button variant="light" color="primary">
-            Add to Home Screen
-          </Button>
           {isIOS && (
-            <p className="text-white text-sm text-center">
-              To install this app on your iOS device, tap the share button
-              <span role="img" aria-label="share icon">
-                {" "}
-                ⎋{" "}
-              </span>
-              and then &quot;Add to Home Screen&quot;
-              <span role="img" aria-label="plus icon">
-                {" "}
-                ➕{" "}
-              </span>
-              .
+            <p className="flex flex-col text-white text-sm text-center items-center">
+              To install this app on your iOS device, tap the share button and
+              then &quot;Add to Home Screen&quot;
             </p>
           )}
         </div>

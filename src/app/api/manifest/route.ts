@@ -3,7 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
-  const id = searchParams.get("id") || "default";
+  const id =
+    searchParams.get("id") || searchParams.get("callbackUrl")?.split("=")[1];
 
   const manifest = {
     name: "Kyūka",
