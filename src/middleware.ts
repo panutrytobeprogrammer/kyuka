@@ -8,7 +8,7 @@ const baseUrl = process.env.BACKEND_URL;
 async function customMiddleware(request: NextRequest) {
   const cspHeader = `
     default-src 'self';
-    connect-src 'self' https://accounts.google.com ${baseUrl};
+    connect-src 'self' https://accounts.google.com ${baseUrl} https://lh3.googleusercontent.com;
     script-src 'self' 'unsafe-inline' 'unsafe-eval';
     style-src 'self' 'unsafe-inline';
     img-src 'self' blob: data:;

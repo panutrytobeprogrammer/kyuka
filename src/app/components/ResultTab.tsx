@@ -23,8 +23,8 @@ function ResultTab({ transactionData, members }: Props) {
   return (
     <div className="flex flex-col gap-4 w-full p-2">
       <div className="flex flex-col gap-2 p-4 bg-box rounded-large">
-        <p className="text-[14px] font-medium text-gray-200">Total expenses</p>
-        <p className="text-[32px] font-semibold text-gray-50">
+        <p className="text-[14px] font-medium text-gray-700">Total expenses</p>
+        <p className="text-[32px] font-semibold text-gray-900">
           THB {transactionData.reduce((acc, curr) => acc + curr.amount, 0)}
         </p>
       </div>
@@ -32,8 +32,8 @@ function ResultTab({ transactionData, members }: Props) {
         {Object.entries(sumByMember).map(([member, amount], index) => (
           <div key={member} className="flex flex-col gap-2">
             <div className="flex flex-col gap-2 p-2">
-              <p className="text-[14px] font-medium text-gray-200">{member}</p>
-              <p className="text-[28px] font-semibold text-gray-50">
+              <p className="text-[14px] font-medium text-gray-700">{member}</p>
+              <p className="text-[28px] font-semibold text-gray-900">
                 THB {amount}
               </p>
             </div>

@@ -53,8 +53,8 @@ function ListTab({ tripId, transactionData, refetch }: Props) {
   return (
     <div className="flex flex-col gap-4 w-full p-2">
       <div className="flex flex-col gap-2 p-4 bg-box rounded-large">
-        <p className="text-[14px] font-medium text-gray-200">Total expenses</p>
-        <p className="text-[32px] font-semibold text-gray-50">
+        <p className="text-[14px] font-medium text-gray-700">Total expenses</p>
+        <p className="text-[32px] font-semibold text-gray-900">
           THB {transactionData.reduce((acc, curr) => acc + curr.amount, 0)}
         </p>
       </div>
@@ -63,7 +63,7 @@ function ListTab({ tripId, transactionData, refetch }: Props) {
           <div key={transaction.id} className="flex flex-col gap-2">
             <div className="flex flex-col gap-2 p-2">
               <div className="flex justify-between">
-                <p className="text-[14px] font-medium text-gray-200">
+                <p className="text-[14px] font-medium text-gray-700">
                   {transaction.name}
                 </p>
                 <Dropdown>
@@ -74,7 +74,7 @@ function ListTab({ tripId, transactionData, refetch }: Props) {
                     <DropdownItem
                       key="remove_tx"
                       color="danger"
-                      className="text-red-500 hover:text-white"
+                      className="text-red-500 hover:text-gray-900"
                       onClick={() => {
                         DeleteTxMutate.mutate(transaction.id);
                       }}
@@ -84,7 +84,7 @@ function ListTab({ tripId, transactionData, refetch }: Props) {
                   </DropdownMenu>
                 </Dropdown>
               </div>
-              <p className="text-[28px] font-semibold text-gray-50">
+              <p className="text-[28px] font-semibold text-gray-900">
                 THB {transaction.amount}
               </p>
             </div>

@@ -7,27 +7,30 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-  background: rgba(244, 244, 243, 0.05);
-  backdrop-filter: blur(50px);
+  /* background: rgba(244, 244, 243, 0.05); */
+  /* backdrop-filter: blur(50px); */
   height: 100vh;
 }
 
 .bg-box {
-  background: #5a5a5a18;
-  backdrop-filter: blur(50px);
+  /* background: #5a5a5a18; */
+  /* backdrop-filter: blur(50px); */
+  background: white;
 }
 
 .bg-item {
-  backdrop-filter: blur(25px);
-  background: #f4f4f380;
+  /* backdrop-filter: blur(25px); */
+  /* background: #f4f4f380; */
+  background: #ababa3;
 }
 
 .bg-image {
-  background-image: url("/background.png");
+  /* background-image: url("/background.png"); */
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  background: #f4f4f3;
 }
 
 body {

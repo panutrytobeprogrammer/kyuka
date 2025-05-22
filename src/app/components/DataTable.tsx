@@ -42,27 +42,15 @@ function DataTable({ tripData, transactionData }: Props) {
   });
 
   return (
-    <Table
-      classNames={{
-        wrapper: "bg-box",
-        th: "bg-item",
-      }}
-      isVirtualized
-      isHeaderSticky
-      maxTableHeight={550}
-    >
+    <Table isVirtualized isHeaderSticky maxTableHeight={550}>
       <TableHeader columns={columns}>
-        {(column) => (
-          <TableColumn key={column.key} className="text-gray-700">
-            {column.label}
-          </TableColumn>
-        )}
+        {(column) => <TableColumn key={column.key}>{column.label}</TableColumn>}
       </TableHeader>
       <TableBody items={rows}>
         {(item) => (
           <TableRow key={item.key}>
             {(columnKey) => (
-              <TableCell className="text-gray-200">
+              <TableCell className="text-gray-700">
                 {getKeyValue(item, columnKey)}
               </TableCell>
             )}

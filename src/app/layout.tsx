@@ -27,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="bg-[#1B2027]">
+    <html lang="en" className="bg-gray-50">
       <body
         className={`${k2d.className} antialiased bg-image flex max-w-md mx-auto flex-col min-h-screen max-h-screen`}
       >
