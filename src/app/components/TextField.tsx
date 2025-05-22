@@ -31,7 +31,7 @@ function TextField<T extends FieldValues>(props: TextFieldProps<T>) {
 
   return (
     <div className="flex flex-col justify-start label-md gap-1">
-      {label && (
+      {/* {label && (
         <div className="flex space-x-2">
           <p className="font-[14px]">
             {label}
@@ -53,7 +53,7 @@ function TextField<T extends FieldValues>(props: TextFieldProps<T>) {
             </Tooltip>
           )}
         </div>
-      )}
+      )} */}
       <Controller
         control={control}
         name={field}
@@ -72,18 +72,12 @@ function TextField<T extends FieldValues>(props: TextFieldProps<T>) {
                 onChange(e);
               }}
               onBlur={onBlur}
-              className={`max-h-[128px] label-md invalid:text-red-500 invalid:border-red-500 group-data-[focus=true]:border-red-500 shadow-none ${
-                disabled ? "custom-disable-input" : "custom-input"
-              }`}
-              classNames={{
-                inputWrapper: "min-h-[34px] h-[34px]",
-                mainWrapper: "min-h-[34px] h-[34px]",
-                innerWrapper: "min-h-[34px] h-[34px]",
-                input: "min-h-[34px] h-[34px]",
-              }}
-              variant="bordered"
+              className={`label-md invalid:text-red-500 invalid:border-red-500 group-data-[focus=true]:border-red-500`}
               maxLength={maxLength}
               disabled={disabled}
+              label={label}
+              isRequired={required}
+              labelPlacement="outside"
             />
           );
         }}

@@ -4,7 +4,13 @@ import {
   TransactionData,
   TripData,
 } from "@/types/index";
-import { addToast, Button, ModalBody, ModalHeader } from "@heroui/react";
+import {
+  addToast,
+  Button,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from "@heroui/react";
 import { saveTransaction } from "@libs/service";
 import { useMutation, UseQueryResult } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
@@ -30,6 +36,7 @@ function AddDataModal({ onClose, tripData, getDataTable }: Props) {
         amount: 0,
       })),
     },
+    mode: "all",
   });
 
   const saveTxMutate = useMutation({
@@ -92,7 +99,9 @@ function AddDataModal({ onClose, tripData, getDataTable }: Props) {
               field={`transaction_by_member.${index}.amount`}
               label={member.name + "'s amount"}
               control={addData.control}
-              error={addData.formState.errors.transaction_by_member}
+              error={
+                addData.formState.errors.transaction_by_member?.[index]?.amount
+              }
               placeholder="eg. 200.00"
               rules={{
                 pattern: {
@@ -102,10 +111,12 @@ function AddDataModal({ onClose, tripData, getDataTable }: Props) {
               }}
             />
           ))}
+        </ModalBody>
+        <ModalFooter>
           <Button className="bg-gray-200" type="submit">
             add
           </Button>
-        </ModalBody>
+        </ModalFooter>
       </form>
     </FormProvider>
   );
