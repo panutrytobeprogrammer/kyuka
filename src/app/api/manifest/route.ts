@@ -12,8 +12,8 @@ export async function GET(req: NextRequest) {
     description: "Kyūka travel application",
     start_url: `/?id=${id}`,
     display: "standalone",
-    background_color: "#27203B",
-    theme_color: "#27203B",
+    background_color: "#f4f4f3",
+    theme_color: "#f4f4f3",
     icons: [
       {
         src: "/icon-192x192.png",
