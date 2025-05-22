@@ -4,7 +4,13 @@ import {
   TransactionData,
   TripData,
 } from "@/types/index";
-import { addToast, Button, ModalBody, ModalHeader } from "@heroui/react";
+import {
+  addToast,
+  Button,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+} from "@heroui/react";
 import { saveTransaction } from "@libs/service";
 import { useMutation, UseQueryResult } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
@@ -102,10 +108,12 @@ function AddDataModal({ onClose, tripData, getDataTable }: Props) {
               }}
             />
           ))}
+        </ModalBody>
+        <ModalFooter>
           <Button className="bg-gray-200" type="submit">
             add
           </Button>
-        </ModalBody>
+        </ModalFooter>
       </form>
     </FormProvider>
   );
