@@ -12,7 +12,7 @@ export const GET = async (
 
   const client = await DBPool.connect();
   const result = await client.query(
-    "SELECT * FROM transaction WHERE trip_id = $1 and active = true",
+    "SELECT * FROM transaction WHERE trip_id = $1 and active = true order by create_date asc",
     [id]
   );
   client.release();
