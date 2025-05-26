@@ -68,7 +68,7 @@ function ListTab({ tripId, transactionData, refetch }: Props) {
                 </p>
                 <Dropdown>
                   <DropdownTrigger>
-                    <IconMenuDot width={20} />
+                    <IconMenuDot width={20} color="#1E1E1C" />
                   </DropdownTrigger>
                   <DropdownMenu>
                     <DropdownItem
