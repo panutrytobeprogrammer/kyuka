@@ -105,7 +105,7 @@ function AddDataModal({ onClose, tripData, getDataTable }: Props) {
               placeholder="eg. 200.00"
               rules={{
                 pattern: {
-                  value: /^[0-9]+(\.[0-9]{1,2})?$/,
+                  value: /^-?\d+(\.\d{1,2})?$/,
                   message: "must be a number",
                 },
               }}
