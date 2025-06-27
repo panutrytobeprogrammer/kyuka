@@ -1,8 +1,8 @@
 "use client";
 import { IconOpenIn } from "@components/Icons";
-import { Link } from "@heroui/react";
 import { getAllTrip } from "@libs/service";
 import { useQuery } from "@tanstack/react-query";
+import Link from "next/link";
 import React from "react";
 
 type Props = {};
@@ -62,7 +62,6 @@ function AdminPage({}: Props) {
               key={item.url}
               className="p-2 border-[1px] rounded-xl text-gray-900 w-full flex justify-between items-center"
               href={item.url}
-              target="_blank"
             >
               {item.name}
               <IconOpenIn width={16} height={16} color="#a2a2a2" />
