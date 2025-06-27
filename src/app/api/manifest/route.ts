@@ -1,3 +1,4 @@
+import { env } from "next-runtime-env";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -30,7 +31,7 @@ export async function GET(req: NextRequest) {
   try {
     if (id !== "admin") {
       const tripInfo = await fetch(
-        `${process.env.NEXTAUTH_URL}/api/trip-name/${id}`,
+        `${env("NEXTAUTH_URL")}/api/trip-name/${id}`,
         {
           method: "GET",
           headers: {

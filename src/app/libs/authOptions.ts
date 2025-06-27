@@ -1,14 +1,15 @@
 import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import { env } from "next-runtime-env";
 
 export function isAuthorized(id: string, email: string) {
-  return fetch(`${process.env.NEXTAUTH_URL}/api/${id}/${email}`, {
+  return fetch(`${env("NEXTAUTH_URL")}/api/${id}/${email}`, {
     cache: "no-store",
   });
 }
 
 export const authOptions: NextAuthOptions = {
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: env("NEXTAUTH_SECRET"),
   pages: {
     signIn: "/login",
     signOut: "/logout",
@@ -16,8 +17,8 @@ export const authOptions: NextAuthOptions = {
   },
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      clientId: env("GOOGLE_CLIENT_ID") as string,
+      clientSecret: env("GOOGLE_CLIENT_SECRET") as string,
     }),
   ],
   callbacks: {

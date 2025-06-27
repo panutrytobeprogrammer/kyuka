@@ -1,12 +1,13 @@
 // lib/postgres.js
+import { env } from "next-runtime-env";
 import { Pool } from "pg";
 
 const DBPool = new Pool({
-  host: process.env.POSTGRES_HOST,
-  port: parseInt(process.env.POSTGRES_PORT as string),
-  user: process.env.POSTGRES_USER,
-  password: process.env.POSTGRES_PASSWORD,
-  database: process.env.POSTGRES_DATABASE,
+  host: env("POSTGRES_HOST"),
+  port: parseInt(env("POSTGRES_PORT") as string),
+  user: env("POSTGRES_USER"),
+  password: env("POSTGRES_PASSWORD"),
+  database: env("POSTGRES_DATABASE"),
 });
 
 export default DBPool;

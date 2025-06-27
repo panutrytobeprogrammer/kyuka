@@ -22,7 +22,7 @@ export const POST = async (req: Request) => {
     });
 
     return successResponse({
-      url: process.env.NEXT_PUBLIC_URL + "/?id=" + result.rows[0].id,
+      url: "/?id=" + result.rows[0].id,
     });
   } catch (err) {
     console.log({
@@ -55,7 +55,7 @@ export const GET = async (req: Request) => {
 
     return successResponse(
       result.rows.map((item) => ({
-        url: process.env.NEXT_PUBLIC_URL + "/?id=" + item.id,
+        url: "/?id=" + item.id,
         name: item.name,
       }))
     );

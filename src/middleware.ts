@@ -1,7 +1,8 @@
 import withAuth, { NextRequestWithAuth } from "next-auth/middleware";
+import { env } from "next-runtime-env";
 import { NextResponse } from "next/server";
 
-const baseUrl = process.env.BACKEND_URL;
+const baseUrl = env("NEXT_PUBLIC_URL");
 
 async function customMiddleware(request: NextRequestWithAuth) {
   const cspHeader = `
@@ -26,7 +27,7 @@ async function customMiddleware(request: NextRequestWithAuth) {
   const pathname = request.url;
 
   if (pathname.startsWith("/admin")) {
-    if (process.env.ADMIN_EMAIL !== request.nextauth.token?.email) {
+    if (env("ADMIN_EMAIL") !== request.nextauth.token?.email) {
       return NextResponse.redirect(new URL("/logout", request.nextUrl));
     }
   }
