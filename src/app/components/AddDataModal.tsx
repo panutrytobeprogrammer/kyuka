@@ -36,7 +36,7 @@ function AddDataModal({ onClose, tripData, getDataTable }: Props) {
         amount: 0,
       })),
     },
-    mode: "all",
+    mode: "onBlur",
   });
 
   const saveTxMutate = useMutation({

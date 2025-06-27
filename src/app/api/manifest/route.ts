@@ -58,8 +58,9 @@ export async function GET(req: NextRequest) {
         },
       });
     } else {
-      manifest.name = manifest.name + " " + id;
-      manifest.short_name = manifest.short_name + " " + id;
+      manifest.name = manifest.name + " admin";
+      manifest.short_name = manifest.short_name + " admin";
+      manifest.start_url = `/admin`;
 
       console.log({
         file: __dirname,

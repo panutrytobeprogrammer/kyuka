@@ -86,6 +86,6 @@ export interface TransactionByMember {
 
 export interface CreateTripPayload {
   name: string;
-  member: { name: string; email: string };
+  member: { name: string; email: string }[];
   description: string;
 }

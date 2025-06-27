@@ -1,4 +1,9 @@
-import { AddDataForm, APIResponse, TransactionData } from "@/types/index";
+import {
+  AddDataForm,
+  APIResponse,
+  CreateTripPayload,
+  TransactionData,
+} from "@/types/index";
 import { TripData } from "@/types/index";
 import HttpClient from "../http-clients";
 
@@ -25,4 +30,11 @@ export const deleteTransaction = async (trip_id: string, tx_id: string) => {
 
 export const checkUser = async (trip_id: string, email: string) => {
   return await HttpClient.get<APIResponse<boolean>>(`/api/${trip_id}/${email}`);
+};
+
+export const addTrip = async (payload: CreateTripPayload) => {
+  return await HttpClient.post<APIResponse<{ url: string }>>(
+    `/api/trip`,
+    payload
+  );
 };
