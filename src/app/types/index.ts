@@ -83,3 +83,9 @@ export interface TransactionByMember {
   amount: number | undefined;
   member_name: string;
 }
+
+export interface CreateTripPayload {
+  name: string;
+  member: { name: string; email: string };
+  description: string;
+}
