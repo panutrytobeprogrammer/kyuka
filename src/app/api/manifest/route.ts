@@ -6,9 +6,20 @@ export async function GET(req: NextRequest) {
   const id =
     searchParams.get("id") || searchParams.get("callbackUrl")?.split("=")[1];
 
+  req.headers;
+
+  const tripInfo = await fetch(`http://localhost:3000/api/trip/${id}`, {
+    method: "GET",
+    headers: {
+      ...req.headers,
+    },
+  });
+
+  const data = await tripInfo.json();
+
   const manifest = {
-    name: "Kyūka",
-    short_name: "Kyūka",
+    name: `Kyūka ${data.data.name}`,
+    short_name: `Kyūka ${data.data.name}`,
     description: "Kyūka travel application",
     start_url: `/?id=${id}`,
     display: "standalone",
