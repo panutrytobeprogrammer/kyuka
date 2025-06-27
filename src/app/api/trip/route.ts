@@ -20,3 +20,23 @@ export const POST = async (req: Request) => {
     return errorResponse("failed to create new trip.");
   }
 };
+
+export const GET = async (req: Request) => {
+  const client = await DBPool.connect();
+  try {
+    const result = await client.query(
+      "SELECT id, name from trip where status = true"
+    );
+
+    client.release();
+
+    return successResponse(
+      result.rows.map((item) => ({
+        url: process.env.NEXT_PUBLIC_URL + "/?id=" + item.id,
+        name: item.name,
+      }))
+    );
+  } catch (err) {
+    return errorResponse("failed to create new trip.");
+  }
+};

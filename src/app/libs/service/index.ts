@@ -38,3 +38,9 @@ export const addTrip = async (payload: CreateTripPayload) => {
     payload
   );
 };
+
+export const getAllTrip = async () => {
+  return await HttpClient.get<APIResponse<{ url: string; name: string }[]>>(
+    `/api/trip`
+  );
+};

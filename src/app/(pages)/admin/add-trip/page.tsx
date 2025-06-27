@@ -6,7 +6,6 @@ import { addToast, Button } from "@heroui/react";
 import { addTrip } from "@libs/service";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
-import React from "react";
 import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 
 type Props = {};
