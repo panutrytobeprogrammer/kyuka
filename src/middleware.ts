@@ -1,11 +1,9 @@
+import withAuth, { NextRequestWithAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
-
-import withAuth from "next-auth/middleware";
 
 const baseUrl = process.env.BACKEND_URL;
 
-async function customMiddleware(request: NextRequest) {
+async function customMiddleware(request: NextRequestWithAuth) {
   const cspHeader = `
     default-src 'self';
     connect-src 'self' https://accounts.google.com ${baseUrl} https://lh3.googleusercontent.com;
@@ -24,6 +22,14 @@ async function customMiddleware(request: NextRequest) {
     "Content-Security-Policy",
     contentSecurityPolicyHeaderValue
   );
+
+  const pathname = request.url;
+
+  if (pathname.startsWith("/admin")) {
+    if (process.env.ADMIN_EMAIL !== request.nextauth.token?.email) {
+      return NextResponse.redirect(new URL("/logout", request.nextUrl));
+    }
+  }
 
   const response = NextResponse.next({
     request: {

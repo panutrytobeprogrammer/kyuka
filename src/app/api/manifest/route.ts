@@ -1,4 +1,3 @@
-// app/api/manifest/route.ts
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -6,22 +5,11 @@ export async function GET(req: NextRequest) {
   const id =
     searchParams.get("id") || searchParams.get("callbackUrl")?.split("=")[1];
 
-  req.headers;
-
-  const tripInfo = await fetch(`http://localhost:3000/api/trip/${id}`, {
-    method: "GET",
-    headers: {
-      ...req.headers,
-    },
-  });
-
-  const data = await tripInfo.json();
-
   const manifest = {
-    name: `Kyūka ${data.data.name}`,
-    short_name: `Kyūka ${data.data.name}`,
+    name: `Kyūka`,
+    short_name: `Kyūka`,
     description: "Kyūka travel application",
-    start_url: `/?id=${id}`,
+    start_url: `/`,
     display: "standalone",
     background_color: "#f4f4f3",
     theme_color: "#f4f4f3",
@@ -39,17 +27,61 @@ export async function GET(req: NextRequest) {
     ],
   };
 
-  console.log({
-    file: __dirname,
-    timestamp: new Date().toISOString(),
-    request: req,
-    response: manifest,
-  });
+  try {
+    if (id !== "admin") {
+      const tripInfo = await fetch(
+        `${process.env.NEXTAUTH_URL}/api/trip-name/${id}`,
+        {
+          method: "GET",
+          headers: {
+            ...req.headers,
+          },
+        }
+      );
+      const data = await tripInfo.json();
 
-  return new NextResponse(JSON.stringify(manifest), {
-    headers: {
-      "Content-Type": "application/manifest+json",
-      "Cache-Control": "no-store",
-    },
-  });
+      manifest.name = manifest.name + ` ${data.data.name}`;
+      manifest.short_name = manifest.short_name + ` ${data.data.name}`;
+      manifest.start_url = `?id=${id}`;
+
+      console.log({
+        file: __dirname,
+        timestamp: new Date().toISOString(),
+        request: req,
+        response: manifest,
+      });
+
+      return new NextResponse(JSON.stringify(manifest), {
+        headers: {
+          "Content-Type": "application/manifest+json",
+          "Cache-Control": "no-store",
+        },
+      });
+    } else {
+      manifest.name = manifest.name + " " + id;
+      manifest.short_name = manifest.short_name + " " + id;
+
+      console.log({
+        file: __dirname,
+        timestamp: new Date().toISOString(),
+        request: req,
+        response: manifest,
+      });
+
+      return new NextResponse(JSON.stringify(manifest), {
+        headers: {
+          "Content-Type": "application/manifest+json",
+          "Cache-Control": "no-store",
+        },
+      });
+    }
+  } catch (err) {
+    console.log({
+      file: __dirname,
+      timestamp: new Date().toISOString(),
+      request: req,
+      response: manifest,
+    });
+    return manifest;
+  }
 }
