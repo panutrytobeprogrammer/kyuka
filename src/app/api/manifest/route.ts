@@ -83,6 +83,11 @@ export async function GET(req: NextRequest) {
       request: req,
       response: manifest,
     });
-    return manifest;
+    return new NextResponse(JSON.stringify(manifest), {
+      headers: {
+        "Content-Type": "application/manifest+json",
+        "Cache-Control": "no-store",
+      },
+    });
   }
 }

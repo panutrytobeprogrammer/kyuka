@@ -8,15 +8,30 @@ export const POST = async (req: Request) => {
   try {
     const result = await client.query(
       "INSERT INTO trip (name, description, member) values ($1, $2, $3) RETURNING id",
-      [payload.name, payload.description, payload.member]
+      [payload.name, payload.description, JSON.stringify(payload.member)]
     );
 
     client.release();
+
+    console.log({
+      file: __dirname,
+      timestamp: new Date().toISOString(),
+      headers: req.headers,
+      request: req,
+      response: result.rows,
+    });
 
     return successResponse({
       url: process.env.NEXT_PUBLIC_URL + "/?id=" + result.rows[0].id,
     });
   } catch (err) {
+    console.log({
+      file: __dirname,
+      timestamp: new Date().toISOString(),
+      headers: req.headers,
+      request: req,
+      response: err,
+    });
     return errorResponse("failed to create new trip.");
   }
 };
@@ -30,6 +45,14 @@ export const GET = async (req: Request) => {
 
     client.release();
 
+    console.log({
+      file: __dirname,
+      timestamp: new Date().toISOString(),
+      headers: req.headers,
+      request: req,
+      response: result.rows,
+    });
+
     return successResponse(
       result.rows.map((item) => ({
         url: process.env.NEXT_PUBLIC_URL + "/?id=" + item.id,
@@ -37,6 +60,13 @@ export const GET = async (req: Request) => {
       }))
     );
   } catch (err) {
+    console.log({
+      file: __dirname,
+      timestamp: new Date().toISOString(),
+      headers: req.headers,
+      request: req,
+      response: err,
+    });
     return errorResponse("failed to create new trip.");
   }
 };
