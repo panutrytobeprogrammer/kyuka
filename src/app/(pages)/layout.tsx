@@ -38,9 +38,9 @@ function Layout({ children }: Props) {
     return (
       <div className="background-theme">
         <div className="flex flex-col items-center justify-center h-screen w-full gap-4 p-4">
-          <p className="text-white text-2xl font-bold">Install App</p>
+          <p className="text-2xl font-bold">Install App</p>
           {isIOS && (
-            <p className="flex flex-col text-white text-sm text-center items-center">
+            <p className="flex flex-col text-sm text-center items-center">
               To install this app on your iOS device, tap the share button and
               then &quot;Add to Home Screen&quot;
             </p>
