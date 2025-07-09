@@ -6,7 +6,7 @@ type Props = {};
 
 function page({}: Props) {
   useEffect(() => {
-    signOut();
+    signOut({ callbackUrl: "/login" });
   }, []);
   return (
     <div className="flex flex-col items-center justify-center h-screen">

@@ -22,7 +22,6 @@ export const GET = async (
     timestamp: new Date().toISOString(),
     headers: req.headers,
     request: req,
-    response: result.rows,
   });
 
   return successResponse(result.rows);
@@ -73,7 +72,6 @@ export const POST = async (
     timestamp: new Date().toISOString(),
     headers: req.headers,
     request: req,
-    response: result.rows,
   });
 
   return successResponse(null);

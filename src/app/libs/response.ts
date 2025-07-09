@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export interface Response<T>
   extends NextResponse<{ code: number; message: string; data: T }> {}
@@ -53,4 +53,8 @@ export const unauthorizedResponse = <T>(data: T): Response<T> => {
     },
     { status: 401 }
   );
+};
+
+export const unauthorizedRedirect = (request: NextRequest) => {
+  return NextResponse.redirect(new URL("/logout", request.nextUrl));
 };
