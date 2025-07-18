@@ -43,7 +43,7 @@ export async function GET(req: NextRequest) {
 
       manifest.name = manifest.name + ` ${data.data.name}`;
       manifest.short_name = manifest.short_name + ` ${data.data.name}`;
-      manifest.start_url = `?id=${id}`;
+      manifest.start_url = `/?id=${id}`;
 
       console.log({
         file: __dirname,
