@@ -31,7 +31,7 @@ export async function GET(req: NextRequest) {
   try {
     if (id !== "admin") {
       const tripInfo = await fetch(
-        `${env("NEXTAUTH_URL")}/api/trip-name/${id}`,
+        `${env("NEXT_PUBLIC_URL")}/api/trip-name/${id}`,
         {
           method: "GET",
           headers: {

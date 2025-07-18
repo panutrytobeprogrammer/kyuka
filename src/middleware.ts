@@ -26,18 +26,18 @@ async function middleware(request: NextRequest) {
     contentSecurityPolicyHeaderValue
   );
 
-  const pathname = request.url;
+  // const pathname = request.url;
 
-  const authHeader = request.headers.get("Authorization");
-  const nextauthToken = await getToken({ req: request });
+  // const authHeader = request.headers.get("Authorization");
+  // const nextauthToken = await getToken({ req: request });
 
-  console.log({ nextauthToken: nextauthToken });
+  // console.log({ nextauthToken: nextauthToken });
 
-  if (pathname.startsWith("/admin")) {
-    if (env("ADMIN_EMAIL") !== nextauthToken?.email) {
-      return unauthorizedRedirect(request);
-    }
-  }
+  // if (pathname.startsWith("/admin")) {
+  //   if (env("ADMIN_EMAIL") !== nextauthToken?.email) {
+  //     return unauthorizedRedirect(request);
+  //   }
+  // }
 
   const response = NextResponse.next({
     request: {
@@ -49,28 +49,28 @@ async function middleware(request: NextRequest) {
     contentSecurityPolicyHeaderValue
   );
 
-  if (!nextauthToken) {
-    if (!authHeader) {
-      return unauthorizedRedirect(request);
-    }
+  // if (!nextauthToken) {
+  //   if (!authHeader) {
+  //     return unauthorizedRedirect(request);
+  //   }
 
-    const base64Credentials = authHeader.split(" ")[1];
-    if (!base64Credentials) {
-      return unauthorizedRedirect(request);
-    }
+  //   const base64Credentials = authHeader.split(" ")[1];
+  //   if (!base64Credentials) {
+  //     return unauthorizedRedirect(request);
+  //   }
 
-    const credentials = Buffer.from(base64Credentials, "base64").toString(
-      "utf-8"
-    );
+  //   const credentials = Buffer.from(base64Credentials, "base64").toString(
+  //     "utf-8"
+  //   );
 
-    const [username, password] = credentials.split(":");
-    if (
-      username !== env("BASIC_USERNAME") ||
-      password !== env("BASIC_PASSWORD")
-    ) {
-      return unauthorizedRedirect(request);
-    }
-  }
+  //   const [username, password] = credentials.split(":");
+  //   if (
+  //     username !== env("BASIC_USERNAME") ||
+  //     password !== env("BASIC_PASSWORD")
+  //   ) {
+  //     return unauthorizedRedirect(request);
+  //   }
+  // }
 
   console.log({
     file: __dirname,
@@ -83,7 +83,7 @@ async function middleware(request: NextRequest) {
   return response;
 }
 
-export default middleware;
+export default withAuth(middleware);
 
 export const config = {
   matcher: [
