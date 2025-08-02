@@ -14,9 +14,8 @@ import {
   Tabs,
   useDisclosure,
 } from "@heroui/react";
-import { checkUser, getTransactionData, getTripData } from "@libs/service";
+import { getTransactionData, getTripData } from "@libs/service";
 import { useQuery } from "@tanstack/react-query";
-import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 
