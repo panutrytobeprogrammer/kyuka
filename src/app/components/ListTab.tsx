@@ -15,6 +15,7 @@ import {
 import { AxiosResponse } from "axios";
 import { APIResponse, TransactionData } from "../types";
 import { IconMenuDot } from "./Icons";
+import { formatDateTime } from "@libs/helper";
 
 type Props = {
   transactionData: TransactionData[];
@@ -63,26 +64,31 @@ function ListTab({ tripId, transactionData, refetch }: Props) {
           <div key={transaction.id} className="flex flex-col gap-2">
             <div className="flex flex-col gap-2 p-2">
               <div className="flex justify-between">
-                <p className="text-[14px] font-medium text-gray-700">
+                <p className="text-[16px] font-medium text-gray-800">
                   {transaction.name}
                 </p>
-                <Dropdown>
-                  <DropdownTrigger>
-                    <IconMenuDot width={20} color="#1E1E1C" />
-                  </DropdownTrigger>
-                  <DropdownMenu>
-                    <DropdownItem
-                      key="remove_tx"
-                      color="danger"
-                      className="text-red-500 hover:text-gray-900"
-                      onClick={() => {
-                        DeleteTxMutate.mutate(transaction.id);
-                      }}
-                    >
-                      <p className="label-md bold">Remove</p>
-                    </DropdownItem>
-                  </DropdownMenu>
-                </Dropdown>
+                <div className="flex flex-col gap-1 items-end">
+                  <Dropdown>
+                    <DropdownTrigger>
+                      <IconMenuDot width={20} color="#1E1E1C" />
+                    </DropdownTrigger>
+                    <DropdownMenu>
+                      <DropdownItem
+                        key="remove_tx"
+                        color="danger"
+                        className="text-red-500 hover:text-gray-900"
+                        onClick={() => {
+                          DeleteTxMutate.mutate(transaction.id);
+                        }}
+                      >
+                        <p className="label-md bold">Remove</p>
+                      </DropdownItem>
+                    </DropdownMenu>
+                  </Dropdown>
+                  <p className="text-[12px] font-normal text-gray-500">
+                    {formatDateTime(transaction.create_date)}
+                  </p>
+                </div>
               </div>
               <p className="text-[28px] font-semibold text-gray-900">
                 THB {transaction.amount}
