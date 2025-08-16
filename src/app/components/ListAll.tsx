@@ -53,14 +53,14 @@ function ListAll({ transactionData, tripId, refetch }: Props) {
   });
   return (
     <div className="flex flex-col gap-4 w-full p-2">
-      <div className="flex flex-col gap-2 rounded-large main-content-height overflow-y-auto">
+      <div className="flex flex-col gap-2 rounded-[3rem] main-content-height overflow-y-auto">
         {transactionData.map((transaction, index) => (
           <div
             key={transaction.id}
-            className="flex flex-col gap-2 bg-box rounded-xl"
+            className="flex flex-col gap-2 bg-box rounded-[3rem]"
           >
             <div className="flex flex-col">
-              <div className="flex justify-between border-b-1 p-4">
+              <div className="flex justify-between border-b-1 p-6 pb-4">
                 <p className="text-[16px] font-medium text-gray-800">
                   {transaction.name}
                 </p>
@@ -84,7 +84,7 @@ function ListAll({ transactionData, tripId, refetch }: Props) {
                   </Dropdown>
                 </div>
               </div>
-              <div className="p-4 flex flex-col gap-2">
+              <div className="p-6 pt-4 flex flex-col gap-2">
                 <p className="text-[28px] font-semibold text-gray-900">
                   ฿ {transaction.amount}
                 </p>

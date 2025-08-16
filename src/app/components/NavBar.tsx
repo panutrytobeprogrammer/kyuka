@@ -20,7 +20,7 @@ function NavBar({ children }: Props) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   return (
-    <div className="fixed bottom-0 bg-white w-full pb-12 pt-4 rounded-t-[2rem]">
+    <div className="fixed bottom-0 bg-white w-full pb-12 pt-4 rounded-t-[3rem]">
       <div className="flex gap-4 w-full justify-evenly">
         <Button isIconOnly>
           <IconHome />
