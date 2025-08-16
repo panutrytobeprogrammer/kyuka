@@ -33,7 +33,7 @@ export default function Providers({ children }: Props) {
           >
             <AppProvider>
               {children}
-              <ToastProvider />
+              <ToastProvider placement="top-center" />
             </AppProvider>
           </Suspense>
         </HeroUIProvider>
