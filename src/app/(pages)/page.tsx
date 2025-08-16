@@ -3,7 +3,9 @@ import AddDataModal from "@components/AddDataModal";
 import DataTable from "@components/DataTable";
 import Header from "@components/Header";
 import { AddIcon } from "@components/Icons";
+import ListAll from "@components/ListAll";
 import ListTab from "@components/ListTab";
+import NavBar from "@components/NavBar";
 import ResultTab from "@components/ResultTab";
 import {
   Button,
@@ -48,23 +50,28 @@ export default function Home() {
         title={getTrip.data?.data.data.name}
         refetch={getDataTable.refetch}
       />
+      <Tabs
+        radius="full"
+        selectedKey={selectedTab}
+        onSelectionChange={(key) => setSelectedTab(key as string)}
+        className="w-full flex justify-center"
+        classNames={{
+          tabList: "bg-box",
+          cursor: "bg-item",
+        }}
+      >
+        {/* <Tab key="addData" title="data" /> */}
+        {/* <Tab key="list" title="by list" /> */}
+        <Tab key="listAll" title="list" />
+        <Tab key="result" title="member" />
+      </Tabs>
       {getDataTable.isSuccess ? (
         (() => {
           switch (selectedTab) {
             case "addData":
               return (
                 <>
-                  <div className="flex justify-end p-2 w-full">
-                    <Button
-                      isIconOnly
-                      className="bg-item"
-                      onPress={() => {
-                        addData.onOpen();
-                      }}
-                    >
-                      <AddIcon />
-                    </Button>
-                  </div>
+                  <div className="flex justify-end p-2 w-full"></div>
                   <div className="p-2 w-full">
                     <DataTable
                       tripData={getTrip.data?.data.data}
@@ -88,6 +95,14 @@ export default function Home() {
                   members={getTrip.data?.data.data.member}
                 />
               );
+            case "listAll":
+              return (
+                <ListAll
+                  tripId={id}
+                  transactionData={getDataTable.data?.data.data}
+                  refetch={getDataTable.refetch}
+                />
+              );
             default:
               return null;
           }
@@ -95,20 +110,7 @@ export default function Home() {
       ) : (
         <></>
       )}
-      <Tabs
-        radius="full"
-        selectedKey={selectedTab}
-        onSelectionChange={(key) => setSelectedTab(key as string)}
-        className="fixed bottom-10 w-full flex justify-center"
-        classNames={{
-          tabList: "bg-box",
-          cursor: "bg-item",
-        }}
-      >
-        <Tab key="addData" title="data" />
-        <Tab key="list" title="by list" />
-        <Tab key="result" title="by member" />
-      </Tabs>
+
       <Modal isOpen={addData.isOpen} onClose={addData.onClose} size="lg">
         <ModalContent>
           {(onClose) => {
@@ -123,6 +125,17 @@ export default function Home() {
           }}
         </ModalContent>
       </Modal>
+      <NavBar>
+        <Button
+          isIconOnly
+          className="bg-item"
+          onPress={() => {
+            addData.onOpen();
+          }}
+        >
+          <AddIcon />
+        </Button>
+      </NavBar>
     </div>
   ) : (
     <div className="flex flex-col h-screen w-full items-center justify-center overflow-y-auto">
