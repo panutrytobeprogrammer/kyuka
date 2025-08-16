@@ -53,7 +53,7 @@ function ListAll({ transactionData, tripId, refetch }: Props) {
   });
   return (
     <div className="flex flex-col gap-4 w-full p-2">
-      <div className="flex flex-col gap-2 rounded-large max-h-[540px] overflow-y-auto">
+      <div className="flex flex-col gap-2 rounded-large main-content-height overflow-y-auto">
         {transactionData.map((transaction, index) => (
           <div
             key={transaction.id}
@@ -90,7 +90,7 @@ function ListAll({ transactionData, tripId, refetch }: Props) {
                 </p>
                 <div className="text-[12px] text-gray-700">
                   {transaction.transaction_by_member.map((member) => (
-                    <p>
+                    <p key={member.member_name}>
                       {member.member_name} ฿{member.amount}
                     </p>
                   ))}

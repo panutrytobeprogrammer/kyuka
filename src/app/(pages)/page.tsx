@@ -27,7 +27,7 @@ export default function Home() {
   const id = params.get("id") as string;
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const [selectedTab, setSelectedTab] = useState("addData");
+  const [selectedTab, setSelectedTab] = useState("listAll");
 
   const getDataTable = useQuery({
     queryKey: ["get-data-table"],
