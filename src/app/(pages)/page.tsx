@@ -17,12 +17,13 @@ import {
 import { getTransactionData, getTripData } from "@libs/service";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default function Home() {
   const addData = useDisclosure();
   const params = useSearchParams();
   const id = params.get("id") as string;
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const [selectedTab, setSelectedTab] = useState("addData");
 
@@ -57,7 +58,9 @@ export default function Home() {
                     <Button
                       isIconOnly
                       className="bg-item"
-                      onPress={addData.onOpen}
+                      onPress={() => {
+                        addData.onOpen();
+                      }}
                     >
                       <AddIcon />
                     </Button>
@@ -111,6 +114,7 @@ export default function Home() {
           {(onClose) => {
             return (
               <AddDataModal
+                inputRef={inputRef}
                 onClose={onClose}
                 tripData={getTrip.data?.data.data}
                 getDataTable={getDataTable}

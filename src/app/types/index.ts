@@ -1,3 +1,4 @@
+import { RefObject } from "react";
 import {
   Control,
   FieldError,
@@ -10,6 +11,7 @@ import {
 } from "react-hook-form";
 
 export interface DefaultInputProps<TFieldValues extends FieldValues = any> {
+  ref?: RefObject<HTMLInputElement | null>;
   field: FieldPath<TFieldValues>;
   control: Control<TFieldValues, any>;
   error:

@@ -16,8 +16,11 @@ import { useMutation, UseQueryResult } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import TextField from "./TextField";
+import NumberField from "./NumberField";
+import { RefObject, useEffect } from "react";
 
 type Props = {
+  inputRef: RefObject<HTMLInputElement | null>;
   onClose: () => void;
   tripData: TripData;
   getDataTable: UseQueryResult<
@@ -26,14 +29,13 @@ type Props = {
   >;
 };
 
-function AddDataModal({ onClose, tripData, getDataTable }: Props) {
+function AddDataModal({ inputRef, onClose, tripData, getDataTable }: Props) {
   const addData = useForm<AddDataForm>({
     defaultValues: {
       name: "",
       is_equal: false,
       transaction_by_member: tripData.member.map((member) => ({
         member_name: member.name,
-        amount: 0,
       })),
     },
     mode: "onBlur",
@@ -47,7 +49,7 @@ function AddDataModal({ onClose, tripData, getDataTable }: Props) {
 
   const onSubmit: SubmitHandler<AddDataForm> = (data) => {
     data.transaction_by_member.forEach((tx) => {
-      tx.amount = Number(tx.amount);
+      tx.amount = Number(tx.amount) ?? 0;
     });
 
     saveTxMutate.mutate(data, {
@@ -65,12 +67,17 @@ function AddDataModal({ onClose, tripData, getDataTable }: Props) {
     });
   };
 
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
   return (
     <FormProvider {...addData}>
       <form onSubmit={addData.handleSubmit(onSubmit)}>
         <ModalHeader className="flex flex-col gap-1">add data</ModalHeader>
         <ModalBody className="flex flex-col gap-4">
           <TextField
+            ref={inputRef}
             field="name"
             label="store name"
             control={addData.control}
@@ -94,7 +101,7 @@ function AddDataModal({ onClose, tripData, getDataTable }: Props) {
             options={[{ id: 1, value: "equally" }]}
           /> */}
           {tripData.member.map((member, index) => (
-            <TextField
+            <NumberField
               key={member.name}
               field={`transaction_by_member.${index}.amount`}
               label={member.name + "'s amount"}
@@ -103,12 +110,12 @@ function AddDataModal({ onClose, tripData, getDataTable }: Props) {
                 addData.formState.errors.transaction_by_member?.[index]?.amount
               }
               placeholder="eg. 200.00"
-              rules={{
-                pattern: {
-                  value: /^-?\d+(\.\d{1,2})?$/,
-                  message: "must be a number",
-                },
-              }}
+              // rules={{
+              //   pattern: {
+              //     value: /^-?\d+(\.\d{1,2})?$/,
+              //     message: "must be a number",
+              //   },
+              // }}
             />
           ))}
         </ModalBody>

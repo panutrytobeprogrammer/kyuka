@@ -1,10 +1,10 @@
 "use client";
-import { Input, Tooltip } from "@heroui/react";
+import { NumberInput } from "@heroui/react";
 import { Controller, FieldValues, UseFormSetValue } from "react-hook-form";
-import { IconErrorOutlined, IconHelp } from "./Icons";
 import { DefaultInputProps } from "../types/index";
+import { IconErrorOutlined } from "./Icons";
 
-interface TextFieldProps<T extends FieldValues> extends DefaultInputProps<T> {
+interface NumberFieldProps<T extends FieldValues> extends DefaultInputProps<T> {
   id?: string;
   variants?: "search" | "select" | "email" | "phone" | undefined;
   maxLength?: number;
@@ -13,11 +13,10 @@ interface TextFieldProps<T extends FieldValues> extends DefaultInputProps<T> {
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
 
-function TextField<T extends FieldValues>(props: TextFieldProps<T>) {
+function NumberField<T extends FieldValues>(props: NumberFieldProps<T>) {
   const {
-    ref,
     label,
-    required = true,
+    required = false,
     description,
     placeholder,
     maxLength,
@@ -32,37 +31,13 @@ function TextField<T extends FieldValues>(props: TextFieldProps<T>) {
 
   return (
     <div className="flex flex-col justify-start label-md gap-1">
-      {/* {label && (
-        <div className="flex space-x-2">
-          <p className="font-[14px]">
-            {label}
-            {required && <span className="required-field text-red-500">*</span>}
-          </p>
-          {description && (
-            <Tooltip
-              content={description}
-              classNames={{
-                base: ["before:bg-gray-900"],
-                content: ["max-w-[25rem] text-wrap", "bg-gray-900 text-white"],
-              }}
-              showArrow
-              placement="top-start"
-            >
-              <button>
-                <IconHelp />
-              </button>
-            </Tooltip>
-          )}
-        </div>
-      )} */}
       <Controller
         control={control}
         name={field}
         rules={rules}
         render={({ field: { onChange, onBlur, value } }) => {
           return (
-            <Input
-              ref={ref}
+            <NumberInput
               id={id}
               data-testid={`input-${field}`}
               name={field}
@@ -80,6 +55,7 @@ function TextField<T extends FieldValues>(props: TextFieldProps<T>) {
               label={label}
               isRequired={required}
               labelPlacement="outside"
+              inputMode="decimal"
             />
           );
         }}
@@ -96,4 +72,4 @@ function TextField<T extends FieldValues>(props: TextFieldProps<T>) {
   );
 }
 
-export default TextField;
+export default NumberField;
