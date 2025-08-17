@@ -26,7 +26,7 @@ type Props = {
 
 function Header({ title, refetch }: Props) {
   return (
-    <div className="flex flex-row justify-between px-4 pt-8 pb-4 w-full">
+    <div className="flex flex-row justify-between px-4 pt-6 pb-4 w-full">
       <p
         className="text-[32px] font-medium text-gray-900"
         onClick={() => refetch()}
