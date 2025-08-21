@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Member, TransactionData } from "../types";
 import { Divider } from "@heroui/react";
+import { formatNumber } from "@libs/helper";
 
 type Props = {
   transactionData: TransactionData[];
@@ -25,7 +26,10 @@ function ResultTab({ transactionData, members }: Props) {
       <div className="flex flex-col gap-2 p-4 bg-box rounded-large">
         <p className="text-[14px] font-medium text-gray-700">Total expenses</p>
         <p className="text-[32px] font-semibold text-gray-900">
-          THB {transactionData.reduce((acc, curr) => acc + curr.amount, 0)}
+          THB{" "}
+          {formatNumber(
+            transactionData.reduce((acc, curr) => acc + curr.amount, 0)
+          )}
         </p>
       </div>
       <div className="flex flex-col gap-2 p-4 bg-box rounded-large max-h-[450px] overflow-y-auto">
@@ -34,7 +38,7 @@ function ResultTab({ transactionData, members }: Props) {
             <div className="flex flex-col gap-2 p-2">
               <p className="text-[14px] font-medium text-gray-700">{member}</p>
               <p className="text-[28px] font-semibold text-gray-900">
-                THB {amount}
+                THB {formatNumber(amount)}
               </p>
             </div>
             {index !== members.length - 1 && <Divider className="bg-item" />}

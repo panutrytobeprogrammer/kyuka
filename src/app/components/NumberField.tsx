@@ -1,8 +1,9 @@
 "use client";
-import { NumberInput } from "@heroui/react";
+import { Button, NumberInput } from "@heroui/react";
 import { Controller, FieldValues, UseFormSetValue } from "react-hook-form";
 import { DefaultInputProps } from "../types/index";
 import { IconErrorOutlined } from "./Icons";
+import { useState } from "react";
 
 interface NumberFieldProps<T extends FieldValues> extends DefaultInputProps<T> {
   id?: string;
@@ -56,6 +57,17 @@ function NumberField<T extends FieldValues>(props: NumberFieldProps<T>) {
               isRequired={required}
               labelPlacement="outside"
               inputMode="decimal"
+              endContent={
+                <Button
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                    onChange(-1 * value);
+                  }}
+                  className="p-0"
+                >
+                  ±
+                </Button>
+              }
             />
           );
         }}

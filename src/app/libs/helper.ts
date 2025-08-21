@@ -14,3 +14,7 @@ export const formatDateTime = (dateIsoString: Date) => {
     .replace(",", "");
   return formatted;
 };
+
+export const formatNumber = (value: number) => {
+  return Number.isInteger(value) ? value.toString() : value.toFixed(2);
+};
