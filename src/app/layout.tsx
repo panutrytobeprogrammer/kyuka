@@ -36,7 +36,7 @@ export default async function RootLayout({
         className={`${k2d.className} antialiased bg-image flex max-w-md mx-auto flex-col min-h-screen max-h-screen`}
       >
         <Providers nonce={nonce}>{children}</Providers>
-        <p className="fixed bottom-2 p-2 w-full text-center text-[12px] text-gray-800">
+        <p className="fixed bottom-2 p-2 w-full max-w-md mx-auto text-center text-[12px] text-gray-800">
           powered by witeseb.website
         </p>
       </body>

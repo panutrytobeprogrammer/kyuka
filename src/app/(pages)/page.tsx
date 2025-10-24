@@ -137,9 +137,13 @@ export default function Home() {
         </Button>
       </NavBar>
     </div>
-  ) : (
+  ) : getTrip.isLoading ? (
     <div className="flex flex-col h-screen w-full items-center justify-center overflow-y-auto">
       <Spinner variant="gradient" color="default" />
+    </div>
+  ) : (
+    <div className="flex flex-col h-screen w-full items-center justify-center overflow-y-auto">
+      Not found
     </div>
   );
 }

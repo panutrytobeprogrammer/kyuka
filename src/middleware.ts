@@ -10,6 +10,7 @@ const baseUrl = env("NEXT_PUBLIC_URL");
 async function middleware(request: NextRequest) {
   const nonce = generateNonce();
   const isDev = process.env.NODE_ENV !== "production";
+  const { pathname }: { pathname: string } = request.nextUrl;
 
   const cspHeader = `
     default-src 'self';
@@ -36,18 +37,18 @@ async function middleware(request: NextRequest) {
   );
   requestHeaders.set("x-nonce", nonce);
 
-  // const pathname = request.url;
+  const authHeader = request.headers.get("Authorization");
+  const nextauthToken = await getToken({ req: request });
 
-  // const authHeader = request.headers.get("Authorization");
-  // const nextauthToken = await getToken({ req: request });
-
-  // console.log({ nextauthToken: nextauthToken });
-
-  // if (pathname.startsWith("/admin")) {
-  //   if (env("ADMIN_EMAIL") !== nextauthToken?.email) {
-  //     return unauthorizedRedirect(request);
-  //   }
-  // }
+  if (pathname.startsWith("/admin")) {
+    console.log("ADMIN_EMAIL", env("ADMIN_EMAIL"));
+    console.log("token email", nextauthToken?.email);
+    
+    
+    if (env("ADMIN_EMAIL") !== nextauthToken?.email) {
+      return unauthorizedRedirect(request);
+    }
+  }
 
   const response = NextResponse.next({
     request: {
