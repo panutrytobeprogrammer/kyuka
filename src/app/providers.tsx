@@ -7,6 +7,7 @@ import { ReactNode, Suspense } from "react";
 
 type Props = {
   children: ReactNode;
+  nonce: string
 };
 
 export default function Providers({ children }: Props) {

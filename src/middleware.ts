@@ -1,3 +1,4 @@
+import { generateNonce } from "@libs/helper";
 import { unauthorizedRedirect } from "@libs/response";
 import { getToken } from "next-auth/jwt";
 import withAuth from "next-auth/middleware";
@@ -7,12 +8,20 @@ import { NextRequest, NextResponse } from "next/server";
 const baseUrl = env("NEXT_PUBLIC_URL");
 
 async function middleware(request: NextRequest) {
+  const nonce = generateNonce();
+  const isDev = process.env.NODE_ENV !== "production";
+
   const cspHeader = `
     default-src 'self';
     connect-src 'self' https://accounts.google.com ${baseUrl} https://lh3.googleusercontent.com;
-    script-src 'self' 'unsafe-inline' 'unsafe-eval';
-    style-src 'self' 'unsafe-inline';
+    script-src 'self' 'nonce-${nonce}' 'strict-dynamic' ${
+    isDev ? "'unsafe-eval'" : ""
+  };
+    style-src 'self' 'nonce-${nonce}' ${isDev ? "'unsafe-inline'" : ""};
     img-src 'self' blob: data:;
+    frame-ancestors 'none'; 
+    upgrade-insecure-requests; 
+    block-all-mixed-content;
 `;
 
   const contentSecurityPolicyHeaderValue = cspHeader
@@ -25,6 +34,7 @@ async function middleware(request: NextRequest) {
     "Content-Security-Policy",
     contentSecurityPolicyHeaderValue
   );
+  requestHeaders.set("x-nonce", nonce);
 
   // const pathname = request.url;
 

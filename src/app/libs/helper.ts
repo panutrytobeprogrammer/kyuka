@@ -18,3 +18,7 @@ export const formatDateTime = (dateIsoString: Date) => {
 export const formatNumber = (value: number) => {
   return Number.isInteger(value) ? value.toString() : value.toFixed(2);
 };
+
+export function generateNonce(): string {
+  return Buffer.from(crypto.randomUUID()).toString("base64");
+}
