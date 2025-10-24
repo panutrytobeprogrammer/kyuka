@@ -143,7 +143,7 @@ export default function Home() {
     </div>
   ) : (
     <div className="flex flex-col h-screen w-full items-center justify-center overflow-y-auto">
-      Not found
+      <p>404: Not found</p>
     </div>
   );
 }
