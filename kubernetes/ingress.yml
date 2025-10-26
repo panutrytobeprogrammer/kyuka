@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: kyuka-web-ingress
+  name: kyuka-web-ingress-dev
   namespace: witeseb
 status:
   loadBalancer:
@@ -10,13 +10,13 @@ status:
 spec:
   ingressClassName: public
   rules:
-    - host: kyuka.witeseb.website
+    - host: kyuka-dev.witeseb.website
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: kyuka-web-svc
+                name: kyuka-web-svc-dev
                 port:
                   number: 3000

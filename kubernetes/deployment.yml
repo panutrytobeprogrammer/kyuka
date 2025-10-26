@@ -2,22 +2,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: witeseb
-  name: kyuka-web
+  name: kyuka-web-dev
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: kyuka-web
+      app: kyuka-web-dev
   template:
     metadata:
       labels:
-        app: kyuka-web
+        app: kyuka-web-dev
     spec:
       imagePullSecrets:
         - name: regcred
       containers:
-        - name: kyuka-web
-          image: registry.witeseb.website/kyuka:0.0.9
+        - name: kyuka-web-dev
+          image: registry.witeseb.website/kyuka:dev
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
