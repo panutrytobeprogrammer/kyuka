@@ -7,10 +7,22 @@ import { NextRequest, NextResponse } from "next/server";
 
 const baseUrl = env("NEXT_PUBLIC_URL");
 
+const CORS_HEADERS = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, POST, PUT, PATCH, DELETE, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization",
+};
+
+
 async function middleware(request: NextRequest) {
   const nonce = generateNonce();
   const isDev = process.env.NODE_ENV !== "production";
   const { pathname }: { pathname: string } = request.nextUrl;
+
+  // Preflight
+  if (request.method === "OPTIONS") {
+    return new NextResponse(null, { status: 204, headers: CORS_HEADERS });
+  }
 
   const cspHeader = `
     default-src 'self';
@@ -89,7 +101,7 @@ async function middleware(request: NextRequest) {
     response: response.headers,
     request: request,
   });
-
+  Object.entries(CORS_HEADERS).forEach(([k, v]) => response.headers.set(k, v));
   return response;
 }
 
