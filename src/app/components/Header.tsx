@@ -1,15 +1,5 @@
-import {
-  Avatar,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownTrigger,
-} from "@heroui/react";
-import { RefetchOptions, QueryObserverResult } from "@tanstack/react-query";
+import { QueryObserverResult, RefetchOptions } from "@tanstack/react-query";
 import { AxiosResponse } from "axios";
-import { signOut, useSession } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
-import { usePathname } from "next/navigation";
 import { APIResponse, TransactionData } from "../types";
 
 type Props = {

@@ -1,5 +1,4 @@
 "use client";
-import { useSearchParams, usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 type Props = {
@@ -7,8 +6,6 @@ type Props = {
 };
 
 function Layout({ children }: Props) {
-  const urlParams = useSearchParams();
-  const pathName = usePathname();
   const [isIOS, setIsIOS] = useState(false);
   const [isStandalone, setIsStandalone] = useState(false);
 
@@ -19,20 +16,6 @@ function Layout({ children }: Props) {
 
     setIsStandalone(window.matchMedia("(display-mode: standalone)").matches);
   }, []);
-
-  useEffect(() => {
-    const id =
-      urlParams.get("id") ||
-      urlParams.get("callbackUrl")?.split("=")[1] ||
-      pathName;
-
-    const manifestLink = document.createElement("link");
-    manifestLink.rel = "manifest";
-    manifestLink.href = pathName.startsWith("/admin")
-      ? `/api/manifest?id=admin`
-      : `/api/manifest?id=${id}`;
-    document.head.appendChild(manifestLink);
-  }, [urlParams]);
 
   if (isIOS && !isStandalone && process.env.NODE_ENV === "production") {
     return (

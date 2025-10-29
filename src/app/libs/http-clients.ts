@@ -1,8 +1,7 @@
 import axios from "axios";
-import { env } from "next-runtime-env";
 import { v4 } from "uuid";
 
-const baseUrl = env("NEXT_PUBLIC_URL");
+const baseUrl = process.env.BACKEND_URL;
 
 const instance = axios.create({
   baseURL: baseUrl,
@@ -18,6 +17,9 @@ const instance = axios.create({
 
 instance.interceptors.request.use(async (config) => {
   config.headers["X-Request-ID"] = v4();
+  config.headers["Authorization"] = `Bearer ${sessionStorage.getItem(
+    "access_token"
+  )}`;
   return config;
 });
 

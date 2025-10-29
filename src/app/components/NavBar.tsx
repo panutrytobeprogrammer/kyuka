@@ -7,7 +7,7 @@ import {
   DropdownMenu,
   DropdownTrigger,
 } from "@heroui/react";
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import { usePathname, useSearchParams } from "next/navigation";
 import { IconHome } from "./Icons";
 
@@ -16,7 +16,6 @@ type Props = {
 };
 
 function NavBar({ children }: Props) {
-  const session = useSession();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   return (
@@ -29,15 +28,13 @@ function NavBar({ children }: Props) {
         <Dropdown>
           <DropdownTrigger>
             <div className="flex gap-2 items-center border-1 rounded-full">
-              {session.status === "authenticated" && (
-                <>
-                  <Avatar
-                    className={`cursor-pointer label-md bold`}
-                    // src={session.data.user?.image || undefined}
-                    isBordered
-                  />
-                </>
-              )}
+              <div>
+                <Avatar
+                  className={`cursor-pointer label-md bold`}
+                  // src={session.data.user?.image || undefined}
+                  isBordered
+                />
+              </div>
             </div>
           </DropdownTrigger>
           <DropdownMenu>
@@ -49,7 +46,7 @@ function NavBar({ children }: Props) {
             >
               Sign in as{" "}
               <span className="bold">
-                {session.data?.user?.email?.split("@")[0]}
+                {/* {session.data?.user?.email?.split("@")[0]} */}
               </span>
             </DropdownItem>
             <DropdownItem

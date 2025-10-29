@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { K2D } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
-import { headers } from "next/headers";
 
 const k2d = K2D({
   weight: ["400", "500", "600", "700"],
@@ -27,15 +26,12 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const header = await headers()
-  const nonce = header.get("x-nonce") as string
-
   return (
     <html lang="en" className="bg-gray-50">
       <body
         className={`${k2d.className} antialiased bg-image flex max-w-md mx-auto flex-col min-h-screen max-h-screen`}
       >
-        <Providers nonce={nonce}>{children}</Providers>
+        <Providers>{children}</Providers>
         <p className="fixed bottom-2 p-2 w-full max-w-md mx-auto text-center text-[12px] text-gray-800">
           powered by witeseb.website
         </p>
