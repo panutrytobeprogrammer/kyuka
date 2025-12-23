@@ -41,9 +41,6 @@ async function middleware(request: NextRequest) {
   const nextauthToken = await getToken({ req: request });
 
   if (pathname.startsWith("/admin")) {
-    console.log("ADMIN_EMAIL", env("ADMIN_EMAIL"));
-    console.log("token email", nextauthToken?.email);
-
     if (env("ADMIN_EMAIL") !== nextauthToken?.email) {
       return unauthorizedRedirect(request);
     }
@@ -82,26 +79,21 @@ async function middleware(request: NextRequest) {
   //   }
   // }
 
-  console.log({
-    file: __dirname,
-    timestamp: new Date().toISOString(),
-    headers: requestHeaders,
-    response: response.headers,
-    request: request,
-  });
   return response;
 }
 
 export default withAuth(middleware);
 
 export const config = {
-  matcher: env("BYPASS_API_MIDDLEWARE")
-    ? ["/", "/admin"]
-    : [
-        "/",
-        "/admin",
-        "/api/transaction/:path*",
-        "/api/trip/:path*",
-        "/api/user/:path*",
-      ],
+  matcher:
+    //  env("BYPASS_API_MIDDLEWARE")
+    //   ? ["/", "/admin"]
+    //   :
+    [
+      "/",
+      "/admin",
+      "/api/transaction/:path*",
+      "/api/trip/:path*",
+      "/api/user/:path*",
+    ],
 };

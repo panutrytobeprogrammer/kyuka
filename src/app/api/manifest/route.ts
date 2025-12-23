@@ -45,13 +45,6 @@ export async function GET(req: NextRequest) {
       manifest.short_name = manifest.short_name + ` ${data.data.name}`;
       manifest.start_url = `/?id=${id}`;
 
-      console.log({
-        file: __dirname,
-        timestamp: new Date().toISOString(),
-        request: req,
-        response: manifest,
-      });
-
       return new NextResponse(JSON.stringify(manifest), {
         headers: {
           "Content-Type": "application/manifest+json",
@@ -63,13 +56,6 @@ export async function GET(req: NextRequest) {
       manifest.short_name = manifest.short_name + " admin";
       manifest.start_url = `/admin`;
 
-      console.log({
-        file: __dirname,
-        timestamp: new Date().toISOString(),
-        request: req,
-        response: manifest,
-      });
-
       return new NextResponse(JSON.stringify(manifest), {
         headers: {
           "Content-Type": "application/manifest+json",
@@ -78,7 +64,7 @@ export async function GET(req: NextRequest) {
       });
     }
   } catch (err) {
-    console.log({
+    console.error({
       file: __dirname,
       timestamp: new Date().toISOString(),
       request: req,

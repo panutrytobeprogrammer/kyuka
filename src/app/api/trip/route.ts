@@ -13,19 +13,11 @@ export const POST = async (req: Request) => {
 
     client.release();
 
-    console.log({
-      file: __dirname,
-      timestamp: new Date().toISOString(),
-      headers: req.headers,
-      request: req,
-      response: result.rows,
-    });
-
     return successResponse({
       url: "/?id=" + result.rows[0].id,
     });
   } catch (err) {
-    console.log({
+    console.error({
       file: __dirname,
       timestamp: new Date().toISOString(),
       headers: req.headers,
@@ -45,14 +37,6 @@ export const GET = async (req: Request) => {
 
     client.release();
 
-    console.log({
-      file: __dirname,
-      timestamp: new Date().toISOString(),
-      headers: req.headers,
-      request: req,
-      response: result.rows,
-    });
-
     return successResponse(
       result.rows.map((item) => ({
         url: "/?id=" + item.id,
@@ -60,7 +44,7 @@ export const GET = async (req: Request) => {
       }))
     );
   } catch (err) {
-    console.log({
+    console.error({
       file: __dirname,
       timestamp: new Date().toISOString(),
       headers: req.headers,
