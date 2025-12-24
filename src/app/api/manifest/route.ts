@@ -6,7 +6,7 @@ export async function GET(req: NextRequest) {
   const id =
     searchParams.get("id") || searchParams.get("callbackUrl")?.split("=")[1];
 
-  const manifest = {
+  let manifest = {
     name: `Kyūka`,
     short_name: `Kyūka`,
     description: "Kyūka travel application",
@@ -29,20 +29,8 @@ export async function GET(req: NextRequest) {
   };
 
   try {
+    console.log("trip_id:", id);
     if (id !== "admin") {
-      const tripInfo = await fetch(
-        `${env("NEXT_PUBLIC_URL")}/api/trip-name/${id}`,
-        {
-          method: "GET",
-          headers: {
-            ...req.headers,
-          },
-        }
-      );
-      const data = await tripInfo.json();
-
-      manifest.name = manifest.name + ` ${data.data.name}`;
-      manifest.short_name = manifest.short_name + ` ${data.data.name}`;
       manifest.start_url = `/?id=${id}`;
 
       return new NextResponse(JSON.stringify(manifest), {
@@ -69,6 +57,7 @@ export async function GET(req: NextRequest) {
       timestamp: new Date().toISOString(),
       request: req,
       response: manifest,
+      error: err,
     });
     return new NextResponse(JSON.stringify(manifest), {
       headers: {
