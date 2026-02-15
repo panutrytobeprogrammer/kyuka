@@ -6,33 +6,6 @@ type Props = {
 };
 
 function Layout({ children }: Props) {
-  const [isIOS, setIsIOS] = useState(false);
-  const [isStandalone, setIsStandalone] = useState(false);
-
-  useEffect(() => {
-    setIsIOS(
-      /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream
-    );
-
-    setIsStandalone(window.matchMedia("(display-mode: standalone)").matches);
-  }, []);
-
-  if (isIOS && !isStandalone && process.env.NODE_ENV === "production") {
-    return (
-      <div className="background-theme">
-        <div className="flex flex-col items-center justify-center h-screen w-full gap-4 p-4">
-          <p className="text-2xl font-bold">Install App</p>
-          {isIOS && (
-            <p className="flex flex-col text-sm text-center items-center">
-              To install this app on your iOS device, tap the share button and
-              then &quot;Add to Home Screen&quot;
-            </p>
-          )}
-        </div>
-      </div>
-    );
-  }
-
   return <div className="flex w-full background-theme p-2">{children}</div>;
 }
 
